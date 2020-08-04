@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="navbar">
     <button class="btn btn-primary">123</button>
   </div>
 </template>
@@ -8,4 +8,8 @@
 export default {};
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.navbar {
+  background-color: $dark;
+}
+</style>

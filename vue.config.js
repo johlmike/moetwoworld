@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+
 module.exports = {
   publicPath: './',
   pages: {
@@ -21,5 +23,12 @@ module.exports = {
         'windows.jQuery': 'jquery',
       }),
     ],
+  },
+  css: {
+    loaderOptions: {
+      sass: {
+        prependData: `@import "@/scss/_variables.scss";`,
+      },
+    },
   },
 };
