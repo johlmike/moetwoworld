@@ -6,7 +6,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      baseUrl: process.env.VUE_APP_BASEURL,
+    };
+  },
+};
 </script>
 
 <style></style>
