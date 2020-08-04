@@ -13,4 +13,13 @@ module.exports = {
       title: '萌兔窩｜細心呵護您的小萌兔',
     },
   },
+  configureWebpack: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'windows.jQuery': 'jquery',
+      }),
+    ],
+  },
 };

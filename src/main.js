@@ -6,9 +6,10 @@ import router from './router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 // Bootstrap
-import BootstrapVue from 'bootstrap-vue';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
+import 'jquery';
+import 'popper.js';
+import 'bootstrap'; // Import js file
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import css file
 // vue-overlay-loading
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -37,8 +38,6 @@ import {
 
 // 載入 Axios
 Vue.use(VueAxios, axios);
-// 載入 Bootstrap
-Vue.use(BootstrapVue);
 // 載入 vue-overlay-loading
 Vue.use(Loading);
 // 載入 lodash
