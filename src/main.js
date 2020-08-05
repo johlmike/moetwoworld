@@ -34,6 +34,7 @@ import {
   faMinusSquare,
   faChevronDown,
   faTrashAlt,
+  faBars,
 } from '@fortawesome/free-solid-svg-icons';
 
 // 載入 Axios
@@ -80,6 +81,7 @@ library.add(
   faMinusSquare,
   faChevronDown,
   faTrashAlt,
+  faBars,
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

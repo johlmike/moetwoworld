@@ -17,6 +17,16 @@ const routes = [
         name: '商品列表',
         component: () => import('../views/layout/Products.vue'),
       },
+      {
+        path: '/about',
+        name: '關於我們',
+        component: () => import('../views/layout/About.vue'),
+      },
+      {
+        path: '/cart',
+        name: '購物車',
+        component: () => import('../views/layout/Cart.vue'),
+      },
     ],
   },
   // 巢狀路由
