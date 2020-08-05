@@ -42,10 +42,6 @@ const routes = [
         path: 'products',
         component: () => import('../views/dashboard/ManageProducts.vue'),
       },
-      // {
-      //   path: 'orders',
-      //   component: () => import('../views/dashboard/Orders.vue'),
-      // },
     ],
   },
 ];
