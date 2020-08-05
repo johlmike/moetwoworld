@@ -63,8 +63,8 @@ export default {};
 .navbar {
   background-color: $bright;
   color: $dark;
-  width: 100vw;
-  position: fixed;
+  width: 100%;
+  position: sticky;
   top: 0;
   z-index: 10;
   padding: 0 1rem;
