@@ -15,7 +15,7 @@
       <font-awesome-icon :icon="['fas', 'bars']" class="nav-icon" />
     </button>
 
-    <div class="collapse navbar-collapse nav-area vw-100" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse nav-area" id="navbarSupportedContent">
       <div class="left nav-block">
         <router-link to="/" v-slot="{ isActive, href }" exact>
           <a :href="href" :class="{ 'is-active': isActive }" class="nav-link">
@@ -63,10 +63,11 @@ export default {};
 .navbar {
   background-color: $bright;
   color: $dark;
+  width: 100vw;
   position: fixed;
   top: 0;
   z-index: 10;
-  padding: 0;
+  padding: 0 1rem;
   .navbar-toggler {
     border: 2px solid $dark;
     color: $dark;
