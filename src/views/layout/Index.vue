@@ -8,6 +8,10 @@
 import Carousel from '@/components/Carousel.vue';
 
 export default {
+  props: {
+    products: Array,
+    cart: Array,
+  },
   components: {
     Carousel,
   },

@@ -52,6 +52,7 @@
 <script>
 export default {
   props: {
+    products: Array,
     cart: Array,
   },
   methods: {

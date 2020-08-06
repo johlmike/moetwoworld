@@ -101,8 +101,6 @@ export default {
   },
   data() {
     return {
-      baseUrl: process.env.VUE_APP_BASEURL,
-      uuid: process.env.VUE_APP_UUID,
       addingProduct: {},
       addingQuantity: 0,
     };
