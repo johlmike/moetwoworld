@@ -1,6 +1,6 @@
 <template>
   <div>
-    商品管理...
+    圖片儲存列表
   </div>
 </template>
 

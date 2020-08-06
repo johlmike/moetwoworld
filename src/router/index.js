@@ -30,17 +30,33 @@ const routes = [
     ],
   },
   // 巢狀路由
-  // {
-  //   path: '/login',
-  //   component: () => import('../views/dashboard/Login.vue'),
-  // },
+  {
+    path: '/admin-login',
+    component: () => import('../views/AdminLogin.vue'),
+  },
   {
     path: '/admin',
     component: () => import('../views/dashboard/Dashboard.vue'),
     children: [
       {
-        path: 'products',
-        component: () => import('../views/dashboard/ManageProducts.vue'),
+        path: 'products-manage',
+        name: '商品管理',
+        component: () => import('../views/dashboard/ProductsManage.vue'),
+      },
+      {
+        path: 'coupon-manage',
+        name: '優惠券管理',
+        component: () => import('../views/dashboard/CouponManage.vue'),
+      },
+      {
+        path: 'order-manage',
+        name: '訂單管理',
+        component: () => import('../views/dashboard/OrderManage.vue'),
+      },
+      {
+        path: 'picture-manage',
+        name: '圖片管理',
+        component: () => import('../views/dashboard/PictureManage.vue'),
       },
     ],
   },
