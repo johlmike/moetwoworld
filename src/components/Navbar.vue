@@ -62,6 +62,8 @@ export default {};
 <style lang="scss" scoped>
 .navbar {
   background-color: $bright;
+  border-bottom: 1px solid $dark;
+  box-shadow: 0 0 3px 0;
   color: $dark;
   width: 100%;
   min-height: 4rem;

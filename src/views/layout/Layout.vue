@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="layout">
     <Navbar></Navbar>
     <router-view :products="products" :cart="cart"></router-view>
   </div>
@@ -62,4 +62,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.layout {
+  background-color: $bright;
+  min-height: 100vh;
+}
+</style>
