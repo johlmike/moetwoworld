@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar></Navbar>
-    <router-view></router-view>
+    <router-view :products="products" :cart="cart"></router-view>
   </div>
 </template>
 
@@ -15,22 +15,28 @@ export default {
       baseUrl: process.env.VUE_APP_BASEURL,
       uuid: process.env.VUE_APP_UUID,
       products: [],
-      page: 1,
+      totalPage: 1,
       cart: [],
     };
   },
   methods: {
-    getProducts() {
+    getProducts(page = 1) {
       const loader = this.$loading.show();
-      const url = `${this.baseUrl}${this.uuid}/ec/products?page=${this.page}&paged=9`;
+      const url = `${this.baseUrl}${this.uuid}/ec/products?page=${page}`;
       this.axios
         .get(url)
         .then((res) => {
           loader.hide();
-          this.products = [...res.data.data];
+          const currentPage = res.data.meta.pagination.current_page;
+          this.totalPages = res.data.meta.pagination.total_pages;
+          this.products = [...this.products, ...res.data.data];
+          // 如果商品列表超過一頁且尚未讀取完畢，再執行一次 getProducts
+          if (currentPage < this.totalPages) {
+            this.getProducts(page + 1);
+          }
         })
         .catch((res) => {
-          console.log(res.data);
+          console.log(res.response);
         });
     },
     getCart() {

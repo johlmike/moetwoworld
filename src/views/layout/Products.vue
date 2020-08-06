@@ -1,6 +1,8 @@
 <template>
-  <div>
-    Products
+  <div class="products">
+    <div class="container">
+      123
+    </div>
   </div>
 </template>
 
