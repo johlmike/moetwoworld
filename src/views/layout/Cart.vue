@@ -54,52 +54,19 @@ export default {
   props: {
     cart: Array,
   },
-  data() {
-    return {
-      baseUrl: process.env.VUE_APP_BASEURL,
-      uuid: process.env.VUE_APP_UUID,
-    };
-  },
   methods: {
     updateCart(index) {
       if (this.cart[index].quantity > 0) {
         // 如果使用者輸入正確的數量(大於 1)，更新購物車
-        const loader = this.$loading.show();
-        const url = `${this.baseUrl}${this.uuid}/ec/shopping`;
-        const data = {
-          product: this.cart[index].product.id,
-          quantity: this.cart[index].quantity,
-        };
-        this.axios
-          .patch(url, data)
-          .then(() => {
-            loader.hide();
-          })
-          .catch((err) => {
-            loader.hide();
-            console.log(err.response);
-          });
+        this.$bus.$emit('updateCart', this.cart[index].product.id, this.cart[index].quantity);
       } else {
         // 如輸入 0 或 負數，預設使用者是要將數量減少至 1
         this.cart[index].quantity = 1;
-        this.updateCart(index);
+        this.$bus.$emit('updateCart', this.cart[index].product.id, 1);
       }
     },
     deleteCart(index) {
-      const loader = this.$loading.show();
-      const productId = this.cart[index].product.id;
-      const url = `${this.baseUrl}${this.uuid}/ec/shopping/${productId}`;
-      this.axios
-        .delete(url)
-        .then(() => {
-          loader.hide();
-          // 更新本地端購物車
-          this.cart.splice(index, 1);
-        })
-        .catch((err) => {
-          loader.hide();
-          console.log(err.response);
-        });
+      this.$bus.$emit('deleteCart', this.cart[index].product.id);
     },
   },
   computed: {
@@ -134,6 +101,7 @@ export default {
     .empty {
       height: 50vh;
       line-height: 50vh;
+      text-align: center;
     }
     .body-item {
       .body-item-title,

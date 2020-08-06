@@ -92,9 +92,22 @@ export default {
           console.log(err.response);
         });
     },
-    deleteCart() {
+    deleteCart(id) {
       console.log('刪除購物車');
-    }
+      const loader = this.$loading.show();
+      const url = `${this.baseUrl}${this.uuid}/ec/shopping/${id}`;
+      this.axios
+        .delete(url)
+        .then(() => {
+          loader.hide();
+          // 更新本地端購物車
+          this.cart = this.cart.filter( cartItem => cartItem.product.id != id );
+        })
+        .catch((err) => {
+          loader.hide();
+          console.log(err.response);
+        });
+    },
   },
   created() {
     // 由 layout 控制商品列表和購物車，減少 Ajax 讀取次數
