@@ -4,7 +4,7 @@
       <nav class="navbar navbar-expand-lg py-0">
         <div class="container-fluid d-flex justify-content-round">
           <div class="nav-block d-flex flex-row">
-            <router-link to="/admin/products-manage" v-slot="{ isActive, href }" exact>
+            <router-link to="/admin" v-slot="{ isActive, href }" exact>
               <a :href="href" :class="{ 'is-active': isActive }" class="nav-link">
                 <font-awesome-icon :icon="['fas', 'home']" class="nav-icon" />
                 <span>商品管理</span>

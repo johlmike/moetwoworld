@@ -39,8 +39,8 @@ const routes = [
     component: () => import('../views/dashboard/Dashboard.vue'),
     children: [
       {
-        path: 'products-manage',
-        alias: '',
+        path: '',
+        alias: 'products-manage',
         name: '商品管理',
         component: () => import('../views/dashboard/ProductsManage.vue'),
       },
