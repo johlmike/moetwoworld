@@ -172,22 +172,24 @@ export default {
       .price {
         font-size: 1.25rem;
         font-weight: bold;
-        color: #28a745;
+        color: $dark;
       }
     }
   }
   .btn-add-cart {
     border-radius: 50%;
+    border: 0;
     width: 40px;
     height: 40px;
     position: absolute;
     bottom: 10px;
     right: 10px;
+    background-color: $dark;
   }
   .icon-cart {
     position: relative;
     left: -2px;
-    bottom: -2px;
+    bottom: -1px;
   }
 }
 .modal-body {

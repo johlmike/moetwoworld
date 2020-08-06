@@ -53,11 +53,11 @@ export default {
           console.log(err.response);
         });
     },
-    addCart(product, quantity) {
+    addCart(id, quantity) {
       const loader = this.$loading.show();
       const url = `${this.baseUrl}${this.uuid}/ec/shopping`;
       const data = {
-        product,
+        product: id,
         quantity,
       };
       this.axios
@@ -72,14 +72,14 @@ export default {
           console.log(err.response);
         });
     },
-    updateCart(product, addingQuantity) {
+    updateCart(id, addingQuantity) {
       const loader = this.$loading.show();
       const url = `${this.baseUrl}${this.uuid}/ec/shopping`;
       // 找出購物車之商品數量，並將使用者輸入之數量往上加
-      const cartProduct = this.cart.find((cartItem) => cartItem.product.id === product);
+      const cartProduct = this.cart.find((cartItem) => cartItem.product.id === id);
       const originalQuantity = cartProduct.quantity;
       const data = {
-        product,
+        product: id,
         quantity: originalQuantity + addingQuantity,
       };
       this.axios
@@ -94,13 +94,18 @@ export default {
           console.log(err.response);
         });
     },
+    deleteCart() {
+      console.log('刪除購物車');
+    }
   },
   created() {
     // 由 layout 控制商品列表和購物車，減少 Ajax 讀取次數
     this.getProducts();
     this.getCart();
+    // 監聽購物車事件
     this.$bus.$on('addCart', this.addCart);
     this.$bus.$on('updateCart', this.updateCart);
+    this.$bus.$on('deleteCart', this.deleteCart);
   },
 };
 </script>
