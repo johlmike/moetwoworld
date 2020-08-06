@@ -72,15 +72,13 @@ export default {
           console.log(err.response);
         });
     },
-    updateCart(id, addingQuantity) {
+    updateCart(id, quantity) {
       const loader = this.$loading.show();
       const url = `${this.baseUrl}${this.uuid}/ec/shopping`;
-      // 找出購物車之商品數量，並將使用者輸入之數量往上加
       const cartProduct = this.cart.find((cartItem) => cartItem.product.id === id);
-      const originalQuantity = cartProduct.quantity;
       const data = {
         product: id,
-        quantity: originalQuantity + addingQuantity,
+        quantity,
       };
       this.axios
         .patch(url, data)

@@ -129,7 +129,10 @@ export default {
     },
     updateCart() {
       const addingId = this.addingProduct.id;
-      this.$bus.$emit('updateCart', addingId, this.addingQuantity);
+      // 找出購物車之商品數量，並將使用者輸入之數量往上加
+      const cartProduct = this.cart.find((cartItem) => cartItem.product.id === addingId);
+      const originalQuantity = cartProduct.quantity;
+      this.$bus.$emit('updateCart', addingId, originalQuantity + this.addingQuantity);
       $('.addCartModal').modal('hide');
     },
   },
