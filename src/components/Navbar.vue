@@ -64,6 +64,7 @@ export default {};
   background-color: $bright;
   color: $dark;
   width: 100%;
+  height: 4rem;
   position: sticky;
   top: 0;
   z-index: 10;

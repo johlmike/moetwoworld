@@ -1,6 +1,6 @@
 <template>
   <div class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner vh-100 h-100">
+    <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="../assets/carousel-1.jpg" class="d-block w-100" alt="#" />
       </div>
@@ -26,11 +26,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.carousel {
+  // 電腦版滿版圖片
+  @media screen and (min-width: 576px) {
+    margin-top: -4rem;
+  }
+  .carousel-inner {
+    max-height: 100vh;
+  }
+}
+
 .hide {
   display: none;
 }
 
 .mouse {
+  // 手機版隱藏捲動提示
+  @media screen and (max-width: 576px) {
+    display: none;
+  }
   color: $bright;
   font-size: 3.5rem;
   text-align: center;
