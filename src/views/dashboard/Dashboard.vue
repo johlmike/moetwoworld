@@ -42,11 +42,14 @@ export default {
     },
   },
   mounted() {
+    let token = '';
     // DOM建立時，檢查是否已有Token
-    const token = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('moerabbitworld-token'))
-      .split('=')[1];
+    if( document.cookie ){
+      token = document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('moerabbitworld-token'))
+        .split('=')[1];
+    }
     // 有Token的話，檢查Token是否正確
     if (token) {
       const loader = this.$loading.show();
