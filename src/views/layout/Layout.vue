@@ -53,11 +53,54 @@ export default {
           console.log(err.response);
         });
     },
+    addCart(product, quantity) {
+      const loader = this.$loading.show();
+      const url = `${this.baseUrl}${this.uuid}/ec/shopping`;
+      const data = {
+        product,
+        quantity,
+      };
+      this.axios
+        .post(url, data)
+        .then((res) => {
+          loader.hide();
+          // 更新本地端之購物車內容
+          this.cart.unshift(this._.cloneDeep(res.data.data));
+        })
+        .catch((err) => {
+          loader.hide();
+          console.log(err.response);
+        });
+    },
+    updateCart(product, addingQuantity) {
+      const loader = this.$loading.show();
+      const url = `${this.baseUrl}${this.uuid}/ec/shopping`;
+      // 找出購物車之商品數量，並將使用者輸入之數量往上加
+      const cartProduct = this.cart.find((cartItem) => cartItem.product.id === product);
+      const originalQuantity = cartProduct.quantity;
+      const data = {
+        product,
+        quantity: originalQuantity + addingQuantity,
+      };
+      this.axios
+        .patch(url, data)
+        .then(() => {
+          loader.hide();
+          // 更新本地端購物車之商品數量
+          cartProduct.quantity = data.quantity;
+        })
+        .catch((err) => {
+          loader.hide();
+          console.log(err.response);
+        });
+    },
   },
   created() {
     // 由 layout 控制商品列表和購物車，減少 Ajax 讀取次數
     this.getProducts();
     this.getCart();
+    this.$bus.$on('addCart', this.addCart);
+    this.$bus.$on('updateCart', this.updateCart);
   },
 };
 </script>

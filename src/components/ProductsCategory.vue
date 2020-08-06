@@ -1,5 +1,5 @@
 <template>
-  <div class="products-category">
+  <div class="products-category mb-4">
     <ul class="list-group">
       <li
         v-for="(category, index) in categoryList"

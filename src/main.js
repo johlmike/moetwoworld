@@ -81,9 +81,11 @@ library.add(
   faMinusSquare,
   faChevronDown,
   faTrashAlt,
-  faBars,
+  faBars
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+// 實體化 $bus
+Vue.prototype.$bus = new Vue();
 
 Vue.config.productionTip = false;
 

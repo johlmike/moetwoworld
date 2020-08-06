@@ -1,21 +1,27 @@
 <template>
-  <div class="d-flex flex-row flex-wrap justify-content-start">
-    <div v-for="(product, index) in products" :key="'product' + index" class="card">
-      <div class="card-top">
-        <router-link :to="`/product/${product.id}`">
-          <img :src="product.imageUrl[0]" class="card-img-top" />
-        </router-link>
-      </div>
-      <div class="d-flex flex-column justify-content-start card-body">
-        <h5 class="card-title">{{ product.title }}</h5>
-        <p class="card-text">{{ product.content }}</p>
-        <div class="card-price">
-          <div class="origin-price">{{ `NT\$ ${product.origin_price}` }}</div>
-          <div class="price">{{ `NT\$ ${product.price}` }}</div>
+  <div class="products-table">
+    <div v-for="(product, index) in products" :key="'product' + index" class="col-sm-4 mb-4">
+      <div class="card">
+        <div class="card-top">
+          <router-link :to="`/product/${product.id}`">
+            <img :src="product.imageUrl[0]" class="card-img-top" />
+          </router-link>
         </div>
-        <a href="#" class="btn btn-primary btn-add-cart" @click.prevent="openAddCartModal(product)">
-          <font-awesome-icon :icon="['fas', 'cart-plus']" class="icon-cart" />
-        </a>
+        <div class="d-flex flex-column justify-content-start card-body">
+          <h5 class="card-title">{{ product.title }}</h5>
+          <p class="card-text">{{ product.content }}</p>
+          <div class="card-price">
+            <div class="origin-price">{{ `NT\$ ${product.origin_price}` }}</div>
+            <div class="price">{{ `NT\$ ${product.price}` }}</div>
+          </div>
+          <a
+            href="#"
+            class="btn btn-primary btn-add-cart"
+            @click.prevent="openAddCartModal(product)"
+          >
+            <font-awesome-icon :icon="['fas', 'cart-plus']" class="icon-cart" />
+          </a>
+        </div>
       </div>
     </div>
     <div
@@ -91,6 +97,7 @@ import $ from 'jquery';
 export default {
   props: {
     products: Array,
+    cart: Array,
   },
   data() {
     return {
@@ -98,7 +105,6 @@ export default {
       uuid: process.env.VUE_APP_UUID,
       addingProduct: {},
       addingQuantity: 0,
-      cart: [],
     };
   },
   methods: {
@@ -116,65 +122,16 @@ export default {
           this.updateCart();
         } else {
           // 沒有重複，新增商品至購物車
-          const url = `${this.baseUrl}${this.uuid}/ec/shopping`;
-          const data = {
-            product: this.addingProduct.id,
-            quantity: this.addingQuantity,
-          };
-          const loader = this.$loading.show();
-          this.axios
-            .post(url, data)
-            .then((res) => {
-              loader.hide();
-              // 更新本地端之購物車內容
-              this.cart.unshift(this._.cloneDeep(res.data.data));
-              $('.addCartModal').modal('hide');
-            })
-            .catch((err) => {
-              loader.hide();
-              console.log(err.response);
-            });
+          this.$bus.$emit('addCart', addingId, this.addingQuantity);
+          $('.addCartModal').modal('hide');
         }
       }
     },
-    getCart() {
-      const url = `${this.baseUrl}${this.uuid}/ec/shopping`;
-      this.axios
-        .get(url)
-        .then((res) => {
-          this.cart = res.data.data;
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
-    },
     updateCart() {
-      const loader = this.$loading.show();
-      const url = `${this.baseUrl}${this.uuid}/ec/shopping`;
-      // 找出購物車之商品數量，並將使用者輸入之數量往上加
       const addingId = this.addingProduct.id;
-      const cartProduct = this.cart.find((cartItem) => cartItem.product.id === addingId);
-      const originalQuantity = cartProduct.quantity;
-      const data = {
-        product: this.addingProduct.id,
-        quantity: originalQuantity + this.addingQuantity,
-      };
-      this.axios
-        .patch(url, data)
-        .then(() => {
-          loader.hide();
-          // 更新本地端購物車之商品數量
-          cartProduct.quantity = data.quantity;
-          $('.addCartModal').modal('hide');
-        })
-        .catch((err) => {
-          loader.hide();
-          console.log(err.response);
-        });
+      this.$bus.$emit('updateCart', addingId, this.addingQuantity);
+      $('.addCartModal').modal('hide');
     },
-  },
-  created() {
-    this.getCart();
   },
 };
 </script>
@@ -184,68 +141,54 @@ export default {
   font-weight: bold;
 }
 .card {
-  width: 32%;
-  padding-top: 2%;
-  margin-right: 0.5rem;
-  margin-bottom: 0.5rem;
-  border: 1.5px solid rgba(0, 0, 0, 0.125);
-}
-.card-top {
-  height: 200px;
-  overflow: hidden;
-  img {
-    width: 99%;
+  border: 0;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  .card-top {
+    height: 200px;
+    overflow: hidden;
   }
-}
-.card-title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.card-text {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  height: 3rem;
-  text-overflow: ellipsis;
-  text-align: left;
-}
-.card-price {
-  text-align: left;
-}
-.origin-price {
-  font-size: 0.8rem;
-  color: #bbbbbb;
-  text-decoration: line-through;
-}
-.price {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #28a745;
-}
-.btn-add-cart {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-}
-.icon-cart {
-  position: relative;
-  left: -2px;
-  bottom: -2px;
-}
-.icon-quantity {
-  font-size: 2rem;
-  cursor: pointer;
-}
-.input-quantity {
-  text-align: center;
-  width: 4rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  .card-body {
+    .card-title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-text {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      height: 3rem;
+      text-overflow: ellipsis;
+      text-align: left;
+    }
+    .card-price {
+      text-align: left;
+      .origin-price {
+        font-size: 0.8rem;
+        color: #bbbbbb;
+        text-decoration: line-through;
+      }
+      .price {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #28a745;
+      }
+    }
+  }
+  .btn-add-cart {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+  .icon-cart {
+    position: relative;
+    left: -2px;
+    bottom: -2px;
+  }
 }
 .modal-body {
   .modal-img {
@@ -256,6 +199,16 @@ export default {
       width: 100%;
     }
   }
+}
+.icon-quantity {
+  font-size: 2rem;
+  cursor: pointer;
+}
+.input-quantity {
+  text-align: center;
+  width: 4rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 // 隱藏 input type=number 的箭頭
 input::-webkit-outer-spin-button,

@@ -2,14 +2,14 @@
   <div class="products">
     <div class="container">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-sm-3">
           <ProductCategory
             v-bind:categoryList="categoryList"
             @changeCategory="handleCategoryChange"
           />
         </div>
-        <div class="col-md-9">
-          <ProductsTable :products="filtedProducts" />
+        <div class="col-sm-9">
+          <ProductsTable :products="filtedProducts" :cart="cart" class="row" />
         </div>
       </div>
     </div>
@@ -23,6 +23,7 @@ import ProductsTable from '@/components/ProductsTable.vue';
 export default {
   props: {
     products: Array,
+    cart: Array,
   },
   components: {
     ProductCategory,
@@ -55,5 +56,8 @@ export default {
 <style lang="scss" scoped>
 .products {
   margin-top: 2.5rem;
+  @media screen and (max-width: 576px){
+    margin-top: 1.5rem;
+  }
 }
 </style>
