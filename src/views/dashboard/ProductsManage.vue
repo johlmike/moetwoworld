@@ -217,7 +217,7 @@ export default {
         });
       }
     },
-    toggleEnabled(index, enabled){
+    toggleEnabled(index, enabled) {
       // 更新本地端商品資料
       this.products[index].enabled = enabled;
       // 更新資料庫商品資料

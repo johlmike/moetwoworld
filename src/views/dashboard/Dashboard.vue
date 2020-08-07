@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import $ from 'jquery';
+/* global $ */
 import DNavbar from '@/components/DNavbar.vue';
 
 export default {
@@ -45,7 +45,7 @@ export default {
   mounted() {
     let token = '';
     // DOM建立時，檢查是否已有Token
-    if( document.cookie ){
+    if (document.cookie) {
       token = document.cookie
         .split('; ')
         .find((row) => row.startsWith('moerabbitworld-token'))

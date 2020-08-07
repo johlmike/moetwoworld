@@ -25,7 +25,6 @@
           <td class="align-middle">{{ product.options.stock }}</td>
           <td class="align-middle">{{ product.unit }}</td>
           <td class="align-middle">
-            <!-- <vs-switch v-model="product.enabled" @input="updateProduct($event, index)"></vs-switch> -->
             <div class="custom-control custom-switch">
               <input
                 type="checkbox"

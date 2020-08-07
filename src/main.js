@@ -6,7 +6,7 @@ import router from './router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 // Bootstrap
-import 'jquery';
+import $ from 'jquery';
 import 'popper.js';
 import 'bootstrap'; // Import js file
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import css file
@@ -43,6 +43,8 @@ import {
 
 // 載入 Axios
 Vue.use(VueAxios, axios);
+// 載入 jQuery
+window.$ = $;
 // 載入 vue-overlay-loading
 Vue.use(Loading);
 // 載入 lodash
@@ -89,7 +91,7 @@ library.add(
   faTicketAlt,
   faClipboardList,
   faImages,
-  faSignOutAlt,
+  faSignOutAlt
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 // 實體化 $bus
