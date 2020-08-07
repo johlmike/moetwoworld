@@ -2,16 +2,16 @@
   <div class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="../assets/carousel-1.jpg" class="d-block w-100" alt="#" />
+        <img src="/img/carousel-1.jpg" class="d-block w-100" alt="#" />
       </div>
       <div class="carousel-item">
-        <img src="../assets/carousel-2.jpg" class="d-block w-100" alt="#" />
+        <img src="/img/carousel-2.jpg" class="d-block w-100" alt="#" />
       </div>
       <div class="carousel-item">
-        <img src="../assets/carousel-3.jpg" class="d-block w-100" alt="#" />
+        <img src="/img/carousel-3.jpg" class="d-block w-100" alt="#" />
       </div>
     </div>
-    <div class="mouse" :class="{hide: !isTop}">
+    <div class="mouse" :class="{ hide: !isTop }">
       <font-awesome-icon :icon="['fas', 'chevron-down']" class="icon-cart" />
     </div>
   </div>
