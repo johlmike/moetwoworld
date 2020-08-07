@@ -1,7 +1,7 @@
 <template>
   <div>
     <DNavbar></DNavbar>
-    <router-view :token="token"></router-view>
+    <router-view :token="token" :tokenReady="tokenReady"></router-view>
     <div class="modal" tabindex="-1" role="dialog" id="error-modal" data-backdrop="static">
       <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -32,6 +32,7 @@ export default {
       baseUrl: process.env.VUE_APP_BASEURL,
       uuid: process.env.VUE_APP_UUID,
       token: '',
+      tokenReady: false,
     };
   },
   methods: {
@@ -65,7 +66,7 @@ export default {
           loader.hide();
           this.token = token;
           this.axios.defaults.headers.common.Authorization = `Bearer ${this.token}`;
-          this.$bus.$emit('token-ready');
+          this.tokenReady = true;
         })
         .catch((err) => {
           loader.hide();

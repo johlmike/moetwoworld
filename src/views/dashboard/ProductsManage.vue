@@ -13,6 +13,7 @@ export default {
   },
   props: {
     token: String,
+    tokenReady: Boolean,
   },
   data() {
     return {
@@ -82,7 +83,16 @@ export default {
     },
   },
   created() {
-    this.$bus.$on('token-ready', this.getAllProducts);
+    if (this.tokenReady) {
+      this.getAllProducts();
+    }
+  },
+  watch: {
+    tokenReady(status) {
+      if (status) {
+        this.getAllProducts();
+      }
+    },
   },
 };
 </script>
