@@ -6,28 +6,28 @@
           <div class="nav-block d-flex flex-row">
             <router-link to="/admin" v-slot="{ isActive, href }" exact>
               <a :href="href" :class="{ 'is-active': isActive }" class="nav-link">
-                <font-awesome-icon :icon="['fas', 'home']" class="nav-icon" />
+                <font-awesome-icon :icon="['fas', 'newspaper']" class="nav-icon" />
                 <span>商品管理</span>
                 <span class="sr-only" v-if="isActive">(current)</span>
               </a>
             </router-link>
             <router-link to="/admin/coupon-manage" v-slot="{ isActive, href }">
               <a :href="href" :class="{ 'is-active': isActive }" class="nav-link">
-                <font-awesome-icon :icon="['fas', 'newspaper']" class="nav-icon" />
+                <font-awesome-icon :icon="['fas', 'ticket-alt']" class="nav-icon" />
                 <span>優惠券管理</span>
                 <span class="sr-only" v-if="isActive">(current)</span>
               </a>
             </router-link>
             <router-link to="/admin/order-manage" v-slot="{ isActive, href }">
               <a :href="href" :class="{ 'is-active': isActive }" class="nav-link">
-                <font-awesome-icon :icon="['fas', 'carrot']" class="nav-icon" />
+                <font-awesome-icon :icon="['fas', 'clipboard-list']" class="nav-icon" />
                 <span>訂單管理</span>
                 <span class="sr-only" v-if="isActive">(current)</span>
               </a>
             </router-link>
             <router-link to="/admin/picture-manage" v-slot="{ isActive, href }">
               <a :href="href" :class="{ 'is-active': isActive }" class="nav-link">
-                <font-awesome-icon :icon="['fas', 'shopping-cart']" class="nav-icon" />
+                <font-awesome-icon :icon="['fas', 'images']" class="nav-icon" />
                 <span>圖片管理</span>
                 <span class="sr-only" v-if="isActive">(current)</span>
               </a>
@@ -35,7 +35,7 @@
           </div>
           <div class="nav-block d-flex flex-row">
             <a href="#" class="nav-link" @click.prevent="logout">
-              <font-awesome-icon :icon="['fas', 'shopping-cart']" class="nav-icon" />
+              <font-awesome-icon :icon="['fas', 'sign-out-alt']" class="nav-icon" />
               <span>登出</span>
             </a>
           </div>
@@ -73,7 +73,7 @@ export default {
         color: $dark;
         font-size: 1rem;
         margin-bottom: -5px;
-        margin: 0 0.5rem -0.05rem 0;
+        margin: 0 0.5rem 0 0;
       }
       &:hover {
         background-color: $dark;

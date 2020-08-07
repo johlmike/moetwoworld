@@ -35,6 +35,10 @@ import {
   faChevronDown,
   faTrashAlt,
   faBars,
+  faTicketAlt,
+  faClipboardList,
+  faImages,
+  faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
 // 載入 Axios
@@ -81,7 +85,11 @@ library.add(
   faMinusSquare,
   faChevronDown,
   faTrashAlt,
-  faBars
+  faBars,
+  faTicketAlt,
+  faClipboardList,
+  faImages,
+  faSignOutAlt,
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 // 實體化 $bus
