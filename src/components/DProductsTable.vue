@@ -1,7 +1,7 @@
 <template>
-  <div class="row mt-3">
+  <div class="row">
     <table class="table table-bordered">
-      <thead class="thead-dark">
+      <thead>
         <tr>
           <th>編號</th>
           <th>分類</th>
@@ -25,19 +25,29 @@
           <td class="align-middle">{{ product.options.stock }}</td>
           <td class="align-middle">{{ product.unit }}</td>
           <td class="align-middle">
-            <vs-switch v-model="product.enabled" @input="updateProduct($event, index)"></vs-switch>
+            <!-- <vs-switch v-model="product.enabled" @input="updateProduct($event, index)"></vs-switch> -->
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                :id="'enabled_' + index"
+                :checked="product.enabled"
+                @input="toggleEnabled($event, index)"
+              />
+              <label class="custom-control-label" :for="'enabled_' + index"></label>
+            </div>
           </td>
-          <td class="align-middle text-center">
-            <i
-              class="fas fa-fire hot-icon"
-              @click="toggleHot(index, false)"
-              v-show="product.options.hot"
-            ></i>
-            <i
-              class="fal fa-fire hot-icon"
-              @click="toggleHot(index, true)"
-              v-show="!product.options.hot"
-            ></i>
+          <td class="align-middle">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                :id="'hot_' + index"
+                :checked="product.options.hot"
+                @input="toggleHot($event, index)"
+              />
+              <label class="custom-control-label" :for="'hot_' + index"></label>
+            </div>
           </td>
           <td class="align-middle">
             <div class="btn-group" role="group">
@@ -73,8 +83,11 @@ export default {
     toggleModal(index) {
       this.$emit('toggle-modal', index);
     },
-    toggleHot(index, hot) {
-      this.$emit('toggle-hot', index, hot);
+    toggleHot(evt, index) {
+      this.$emit('toggle-hot', index, evt.target.checked);
+    },
+    toggleEnabled(evt, index) {
+      this.$emit('toggle-enabled', index, evt.target.checked);
     },
     deleteProduct(index) {
       this.$emit('delete-product', index);
@@ -83,4 +96,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+thead {
+  text-align: center;
+  background-color: $dark;
+  color: white;
+}
+tbody {
+  text-align: center;
+}
+</style>
