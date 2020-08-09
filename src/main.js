@@ -9,7 +9,8 @@ import VueAxios from 'vue-axios';
 import $ from 'jquery';
 import 'popper.js';
 import 'bootstrap'; // Import js file
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import css file
+// import 'bootstrap/dist/css/bootstrap.min.css'; // 改於 main.scss 載入
+import './scss/main.scss';
 // vue-overlay-loading
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
