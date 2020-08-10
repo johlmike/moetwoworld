@@ -9,7 +9,8 @@
         ></Pagination>
       </div>
       <button type="button" class="btn btn-primary btn-add" @click="toggleModal('new')">
-        <i class="far fa-plus-square"></i> 新增商品
+        <font-awesome-icon :icon="['fas', 'plus-square']" class="nav-icon" />
+        新增商品
       </button>
     </div>
     <DProductsTable

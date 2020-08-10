@@ -51,10 +51,12 @@
           <td class="align-middle">
             <div class="btn-group" role="group">
               <button type="button" class="btn btn-outline-primary" @click="toggleModal(index)">
-                <i class="fas fa-edit"></i> 編輯
+                <font-awesome-icon :icon="['fas', 'edit']" class="nav-icon" />
+                編輯
               </button>
               <button type="button" class="btn btn-outline-warning" @click="triggerDelete(index)">
-                <i class="far fa-trash-alt"></i> 刪除
+                <font-awesome-icon :icon="['fas', 'trash-alt']" class="nav-icon" />
+                刪除
               </button>
             </div>
           </td>
