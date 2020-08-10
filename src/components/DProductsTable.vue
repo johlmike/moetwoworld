@@ -53,7 +53,7 @@
               <button type="button" class="btn btn-outline-primary" @click="toggleModal(index)">
                 <i class="fas fa-edit"></i> 編輯
               </button>
-              <button type="button" class="btn btn-outline-danger" @click="deleteProduct(index)">
+              <button type="button" class="btn btn-outline-warning" @click="triggerDelete(index)">
                 <i class="far fa-trash-alt"></i> 刪除
               </button>
             </div>
@@ -61,10 +61,19 @@
         </tr>
       </tbody>
     </table>
+    <CheckModal
+      ref="checkModal"
+      :msg="checkMsg"
+      agreeText="確定刪除"
+      cancelText="取消"
+      mainColor="warning"
+    ></CheckModal>
   </div>
 </template>
 
 <script>
+import CheckModal from '@/components/CheckModal.vue';
+
 export default {
   props: {
     products: Array,
@@ -72,9 +81,10 @@ export default {
   },
   data() {
     return {
-      styles: {},
+      checkMsg: '',
     };
   },
+  components: { CheckModal },
   methods: {
     updateProduct(evt, index) {
       this.$emit('update-product', evt, index);
@@ -90,6 +100,10 @@ export default {
     },
     deleteProduct(index) {
       this.$emit('delete-product', index);
+    },
+    triggerDelete(index) {
+      this.checkMsg = `確認刪除「${this.products[index].title}」嗎？`;
+      this.$refs.checkModal.openModal(this.deleteProduct.bind(this, index));
     },
   },
 };
