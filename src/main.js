@@ -17,6 +17,8 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 // VeeValidate
 import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate';
 import { required, min_value as minValue, email, min } from 'vee-validate/dist/rules';
+// Vue2-Editor
+import Vue2Editor from 'vue2-editor';
 // Lodash
 import VueLodash from 'vue-lodash';
 import lodash from 'lodash';
@@ -49,6 +51,8 @@ Vue.use(VueAxios, axios);
 window.$ = $;
 // 載入 vue-overlay-loading
 Vue.use(Loading);
+// 載入 Vue2Editor
+Vue.use(Vue2Editor);
 // 載入 lodash
 Vue.use(VueLodash, { lodash });
 // 設定 VeeValidate

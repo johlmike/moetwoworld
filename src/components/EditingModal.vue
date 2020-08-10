@@ -115,7 +115,7 @@
                 </div>
                 <div class="form-row">
                   <div class="col">
-                    <label for="content">商品敘述</label>
+                    <label for="content">商品簡述</label>
                     <textarea
                       class="form-control"
                       id="content"
@@ -123,14 +123,11 @@
                       v-model="editingProduct.content"
                     ></textarea>
                   </div>
+                </div>
+                <div class="form-row mt-3">
                   <div class="col">
                     <label for="description">商品說明</label>
-                    <textarea
-                      class="form-control"
-                      id="description"
-                      rows="3"
-                      v-model="editingProduct.description"
-                    ></textarea>
+                    <vue-editor v-model="editingProduct.description" />
                   </div>
                 </div>
                 <div class="form-row mt-3">
@@ -215,10 +212,10 @@ export default {
         ready = false;
         errorMsg += "<span style='font-weight: bold;'>商品分類</span> 為必填項目<br>";
       }
-      // 商品敘述 為必填項目
+      // 商品簡述 為必填項目
       if (!this.editingProduct.content) {
         ready = false;
-        errorMsg += "<span style='font-weight: bold;'>商品敘述</span> 為必填項目<br>";
+        errorMsg += "<span style='font-weight: bold;'>商品簡述</span> 為必填項目<br>";
       }
       // 商品說明 為必填項目
       if (!this.editingProduct.description) {
