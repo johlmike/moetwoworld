@@ -16,7 +16,13 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 // VeeValidate
 import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate';
-import { required, min_value as minValue, email, min } from 'vee-validate/dist/rules';
+import {
+  required,
+  min_value as minValue,
+  email,
+  min,
+  max_value as maxValue,
+} from 'vee-validate/dist/rules';
 // Vue2-Editor
 import Vue2Editor from 'vue2-editor';
 // Lodash
@@ -72,7 +78,11 @@ extend('min', {
 });
 extend('min_value', {
   ...minValue,
-  message: '數量最少為{min}',
+  message: '最少為{min}',
+});
+extend('max_value', {
+  ...maxValue,
+  message: '最多為{max}',
 });
 configure({
   classes: {
