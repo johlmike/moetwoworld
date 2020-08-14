@@ -2,13 +2,13 @@
   <div class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="/img/carousel-1.jpg" class="d-block w-100" alt="#" />
+        <img :src="`${publicPath}img/carousel-1.jpg`" class="d-block w-100" alt="#" />
       </div>
       <div class="carousel-item">
-        <img src="/img/carousel-2.jpg" class="d-block w-100" alt="#" />
+        <img :src="`${publicPath}img/carousel-2.jpg`" class="d-block w-100" alt="#" />
       </div>
       <div class="carousel-item">
-        <img src="/img/carousel-3.jpg" class="d-block w-100" alt="#" />
+        <img :src="`${publicPath}img/carousel-3.jpg`" class="d-block w-100" alt="#" />
       </div>
     </div>
     <div class="mouse" :class="{ hide: !isTop }">
@@ -21,6 +21,11 @@
 export default {
   props: {
     isTop: Boolean,
+  },
+  data() {
+    return {
+      publicPath: process.env.BASE_URL,
+    };
   },
 };
 </script>
