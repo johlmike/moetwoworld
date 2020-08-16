@@ -19,7 +19,7 @@
             type="button"
             class="btn"
             :class="`btn-${mainColor}`"
-            @click="cb"
+            @click="onClick"
             data-dismiss="modal"
           >
             {{ agreeText }}
@@ -42,6 +42,9 @@ export default {
     secondColor: { type: String, default: 'secondary' },
   },
   methods: {
+    onClick() {
+      this.cb();
+    },
     cb() {
       console.error('Callback not found');
     },

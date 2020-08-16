@@ -23,8 +23,8 @@
         </thead>
         <tbody>
           <tr v-for="(order, index) in orders" :key="'order_' + index">
-            <td class="align-middle">{{ paged * (page - 1) + index + 1 }}</td>
-            <td scope="row" class="align-middle">{{ order.created.datetime }}</td>
+            <td scope="row" class="align-middle">{{ paged * (page - 1) + index + 1 }}</td>
+            <td class="align-middle">{{ order.created.datetime }}</td>
             <td class="align-middle">
               <ul class="list-group list-group-flush">
                 <li

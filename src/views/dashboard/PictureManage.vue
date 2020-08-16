@@ -13,19 +13,23 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>編號</th>
-            <th>圖片</th>
-            <th>刪除</th>
+            <th class="col-index">編號</th>
+            <th class="col-img">圖片</th>
+            <th class="col-del">刪除</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(picture, index) in pictures" :key="'pic_' + index">
-            <td class="align-middle">{{ paged * (page - 1) + index + 1 }}</td>
-            <td scope="row" class="align-middle">
-              <img :src="picture.path" :alt="picture.id" />
+            <td scope="row" class="align-middle col-index">{{ paged * (page - 1) + index + 1 }}</td>
+            <td class="align-middle col-img">
+              <img :src="picture.path" :alt="picture.id" width="50%" />
             </td>
-            <td class="align-middle">
-              <button type="button" class="btn btn-outline-warning">
+            <td class="align-middle col-del">
+              <button
+                type="button"
+                class="btn btn-outline-warning"
+                @click="triggerDelete(picture.id, index)"
+              >
                 <font-awesome-icon :icon="['fas', 'trash-alt']" class="nav-icon" />
                 刪除
               </button>
@@ -88,6 +92,24 @@ export default {
           console.log(err.response);
         });
     },
+    deletePicture(id, index) {
+      const loader = this.$loading.show();
+      const url = `${this.baseUrl}${this.uuid}/admin/storage/${id}`;
+      // Ajax
+      this.axios
+        .delete(url)
+        .then(() => {
+          loader.hide();
+          this.pictures.splice(index, 1);
+        })
+        .catch((err) => {
+          loader.hide();
+          console.log(err.response);
+        });
+    },
+    triggerDelete(id, index) {
+      this.$refs.checkModal.openModal(this.deletePicture.bind(this, id, index));
+    },
     changePage(page) {
       this.orders = [];
       this.page = page;
@@ -117,5 +139,11 @@ thead {
 }
 tbody {
   text-align: center;
+}
+.col-index {
+  width: 8.33%;
+}
+.col-img {
+  width: 75%;
 }
 </style>
