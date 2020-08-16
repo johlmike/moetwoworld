@@ -28,7 +28,7 @@
         </thead>
         <tbody>
           <tr v-for="(coupon, index) in coupons" :key="'coupon_' + index">
-            <td scope="row" class="align-middle">{{ paged * (page - 1) + index + 1 }}</td>
+            <td class="align-middle">{{ paged * (page - 1) + index + 1 }}</td>
             <td class="align-middle">{{ coupon.code }}</td>
             <td class="align-middle">{{ coupon.title }}</td>
             <td class="align-middle">
