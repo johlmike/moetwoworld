@@ -17,6 +17,7 @@
       class="mt-3"
       :products="products"
       :page="page"
+      :paged="paged"
       @update-product="updateProduct"
       @toggle-enabled="toggleEnabled"
       @toggle-hot="toggleHot"
@@ -90,13 +91,14 @@ export default {
       editingId: '',
       totalPage: 1,
       page: 1,
+      paged: 15,
       isCreating: true,
     };
   },
   methods: {
-    getAllProducts() {
+    getProducts() {
       const loader = this.$loading.show();
-      const url = `${this.baseUrl}${this.uuid}/admin/ec/products?page=${this.page}`;
+      const url = `${this.baseUrl}${this.uuid}/admin/ec/products?page=${this.page}&paged=${this.paged}`;
       // Ajax
       this.axios
         .get(url)
@@ -131,7 +133,7 @@ export default {
           loader.hide();
           this.editingProduct = this._.cloneDeep(this.productTemplate); // 將editingProduct清空
           this.page = 1; // 自動跳轉到page 1
-          this.getAllProducts(); // 重新讀取商品列表
+          this.getProducts(); // 重新讀取商品列表
           this.$refs.editingModal.closeEditingModal();
         })
         .catch((err) => {
@@ -196,7 +198,7 @@ export default {
         .delete(url)
         .then(() => {
           loader.hide();
-          this.getAllProducts(); // 刷新頁面
+          this.getProducts(); // 刷新頁面
         })
         .catch((err) => {
           loader.hide();
@@ -246,18 +248,18 @@ export default {
     changePage(page) {
       this.products = [];
       this.page = page;
-      this.getAllProducts();
+      this.getProducts();
     },
   },
   created() {
     if (this.tokenReady) {
-      this.getAllProducts();
+      this.getProducts();
     }
   },
   watch: {
     tokenReady(status) {
       if (status) {
-        this.getAllProducts();
+        this.getProducts();
       }
     },
   },

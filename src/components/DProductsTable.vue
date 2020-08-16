@@ -17,7 +17,7 @@
       </thead>
       <tbody>
         <tr v-for="(product, index) in products" :key="'product_' + index">
-          <td scope="row" class="align-middle">{{ 25 * (page - 1) + index + 1 }}</td>
+          <td scope="row" class="align-middle">{{ paged * (page - 1) + index + 1 }}</td>
           <td class="align-middle">{{ product.category }}</td>
           <td class="align-middle">{{ product.title }}</td>
           <td class="align-middle">{{ product.origin_price }}</td>
@@ -80,6 +80,7 @@ export default {
   props: {
     products: Array,
     page: Number,
+    paged: Number,
   },
   data() {
     return {
