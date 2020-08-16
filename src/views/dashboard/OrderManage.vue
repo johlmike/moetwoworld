@@ -237,14 +237,10 @@ export default {
   methods: {
     getOrders() {
       const loader = this.$loading.show();
-      const url = `${this.baseUrl}${this.uuid}/admin/ec/orders`;
-      const data = {
-        page: this.page,
-        paged: this.paged,
-      };
+      const url = `${this.baseUrl}${this.uuid}/admin/ec/orders?page=${this.page}&paged=${this.paged}`;
       // Ajax
       this.axios
-        .get(url, data)
+        .get(url)
         .then((res) => {
           loader.hide();
           this.orders = res.data.data;

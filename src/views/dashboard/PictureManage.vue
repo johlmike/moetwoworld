@@ -74,14 +74,10 @@ export default {
   methods: {
     getPictures() {
       const loader = this.$loading.show();
-      const url = `${this.baseUrl}${this.uuid}/admin/storage`;
-      const data = {
-        page: this.page,
-        paged: this.paged,
-      };
+      const url = `${this.baseUrl}${this.uuid}/admin/storage?page=${this.page}&paged=${this.paged}`;
       // Ajax
       this.axios
-        .get(url, data)
+        .get(url)
         .then((res) => {
           loader.hide();
           this.pictures = res.data.data;

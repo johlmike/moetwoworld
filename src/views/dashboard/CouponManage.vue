@@ -266,14 +266,10 @@ export default {
   methods: {
     getCoupons() {
       const loader = this.$loading.show();
-      const url = `${this.baseUrl}${this.uuid}/admin/ec/coupons`;
-      const data = {
-        page: this.page,
-        paged: this.paged,
-      };
+      const url = `${this.baseUrl}${this.uuid}/admin/ec/coupons?page=${this.page}&paged=${this.paged}`;
       // Ajax
       this.axios
-        .get(url, data)
+        .get(url)
         .then((res) => {
           loader.hide();
           this.coupons = res.data.data;
