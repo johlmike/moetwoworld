@@ -33,6 +33,27 @@
                     :key="'img_' + editingProduct.id + '_' + index"
                   />
                 </template>
+                <div class="input-group" v-show="!(editingProduct.imageUrl.length >= 5)">
+                  <div class="custom-file">
+                    <input
+                      type="file"
+                      class="custom-file-input"
+                      id="input-img"
+                      aria-describedby="upload-img"
+                    />
+                    <label class="custom-file-label" for="input-img"></label>
+                  </div>
+                  <div class="input-group-append">
+                    <button
+                      class="btn btn-outline-primary"
+                      type="button"
+                      id="upload-img"
+                      @click="uploadImg"
+                    >
+                      開始上傳
+                    </button>
+                  </div>
+                </div>
               </div>
               <div class="col-sm-8">
                 <div class="form-group">
@@ -182,6 +203,8 @@ export default {
   },
   data() {
     return {
+      baseUrl: process.env.VUE_APP_BASEURL,
+      uuid: process.env.VUE_APP_UUID,
       editingProduct: {},
       errorMsg: '',
     };
@@ -235,9 +258,42 @@ export default {
     closeEditingModal() {
       $('#productModal').modal('hide');
     },
+    uploadImg() {
+      const inputImg = document.querySelector('#input-img');
+      const uploadFile = inputImg.files[0];
+      if (uploadFile) {
+        const loader = this.$loading.show();
+        const url = `${this.baseUrl}${this.uuid}/admin/storage`;
+        const formData = new FormData();
+        formData.append('file', uploadFile);
+        // Ajax
+        this.axios
+          .post(url, formData, {
+            headers: {
+              'Content-Type': 'mutipart/form-data',
+            },
+          })
+          .then((res) => {
+            loader.hide();
+            inputImg.value = '';
+            this.editingProduct.imageUrl.unshift(res.data.data.path);
+          })
+          .catch((err) => {
+            loader.hide();
+            console.log(err.response);
+          });
+      }
+    },
   },
   created() {
     this.editingProduct = this._.cloneDeep(this.product);
+  },
+  mounted() {
+    // 讓 bootstrap 的 input file 會顯示選取的檔案之名稱
+    $('input[type="file"]').change(function(e) {
+      const fileName = e.target.files[0].name;
+      $('.custom-file-label').html(fileName);
+    });
   },
   watch: {
     product() {
@@ -253,4 +309,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.custom-file-input ~ .custom-file-label::after {
+  content: '選擇圖片';
+}
+</style>
