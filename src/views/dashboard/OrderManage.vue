@@ -13,6 +13,7 @@
       <table class="table table-bordered">
         <thead>
           <tr>
+            <th>編號</th>
             <th>下單時間</th>
             <th>購買品項</th>
             <th>付款方式</th>
@@ -22,6 +23,7 @@
         </thead>
         <tbody>
           <tr v-for="(order, index) in orders" :key="'order_' + index">
+            <td class="align-middle">{{ paged * (page - 1) + index + 1 }}</td>
             <td scope="row" class="align-middle">{{ order.created.datetime }}</td>
             <td class="align-middle">
               <ul class="list-group list-group-flush">
