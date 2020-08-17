@@ -2,16 +2,16 @@
   <div class="products-table">
     <div v-for="(product, index) in products" :key="'product' + index" class="col-sm-4 mb-4">
       <div class="card">
-        <div
-          class="card-top"
-          :style="{
-            backgroundImage: 'url(' + product.imageUrl[0] + ')',
-          }"
-        >
-          <!-- <router-link :to="`/product/${product.id}`">
-            <img :src="product.imageUrl[0]" class="card-img-top" />
-          </router-link> -->
-        </div>
+        <router-link :to="`/product/${product.id}`" tag="div">
+          <div
+            class="card-top"
+            :style="{
+              backgroundImage: 'url(' + product.imageUrl[0] + ')',
+            }"
+          >
+            <!-- <img :src="product.imageUrl[0]" class="card-img-top" /> -->
+          </div>
+        </router-link>
         <div class="d-flex flex-column justify-content-start card-body">
           <h5 class="card-title">{{ product.title }}</h5>
           <p class="card-text">{{ product.content }}</p>
@@ -152,9 +152,14 @@ export default {
   .card-top {
     height: 200px;
     overflow: hidden;
+    cursor: pointer;
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto 100%;
+    &:hover {
+      background-size: auto 120%;
+      transition-duration: 500ms;
+    }
   }
   .card-body {
     .card-title {
