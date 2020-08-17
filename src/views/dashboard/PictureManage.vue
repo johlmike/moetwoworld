@@ -22,7 +22,7 @@
           <tr v-for="(picture, index) in pictures" :key="'pic_' + index">
             <td scope="row" class="align-middle col-index">{{ paged * (page - 1) + index + 1 }}</td>
             <td class="align-middle col-img">
-              <img :src="picture.path" :alt="picture.id" width="50%" />
+              <img :src="picture.path" :alt="picture.id" class="img-picture" />
             </td>
             <td class="align-middle col-del">
               <button
@@ -141,5 +141,9 @@ tbody {
 }
 .col-img {
   width: 75%;
+}
+.img-picture {
+  max-width: 50%;
+  max-height: 30vh;
 }
 </style>
