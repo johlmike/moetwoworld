@@ -276,6 +276,7 @@ export default {
           .then((res) => {
             loader.hide();
             inputImg.value = '';
+            $('.custom-file-label').html('');
             this.editingProduct.imageUrl.unshift(res.data.data.path);
           })
           .catch((err) => {
