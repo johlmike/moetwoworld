@@ -2,14 +2,16 @@
   <div class="layout">
     <Navbar></Navbar>
     <router-view :products="products" :cart="cart"></router-view>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar.vue';
+import Footer from '@/components/Footer.vue';
 
 export default {
-  components: { Navbar },
+  components: { Navbar, Footer },
   data() {
     return {
       baseUrl: process.env.VUE_APP_BASEURL,
@@ -130,6 +132,7 @@ export default {
     this.$bus.$on('addCart', this.addCart);
     this.$bus.$on('updateCart', this.updateCart);
     this.$bus.$on('deleteCart', this.deleteCart);
+    this.$bus.$on('deleteAllCart', this.deleteAllCart);
   },
 };
 </script>

@@ -49,6 +49,9 @@ import {
   faClipboardList,
   faImages,
   faSignOutAlt,
+  faPhone,
+  faEnvelope,
+  faMap,
 } from '@fortawesome/free-solid-svg-icons';
 
 // 載入 Axios
@@ -108,7 +111,10 @@ library.add(
   faTicketAlt,
   faClipboardList,
   faImages,
-  faSignOutAlt
+  faSignOutAlt,
+  faPhone,
+  faEnvelope,
+  faMap
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 // 實體化 $bus
