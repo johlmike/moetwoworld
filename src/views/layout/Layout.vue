@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <Navbar></Navbar>
-    <router-view :products="products" :cart="cart"></router-view>
+    <router-view :products="products" :cart="cart" class="view"></router-view>
     <Footer></Footer>
   </div>
 </template>
@@ -141,5 +141,9 @@ export default {
 .layout {
   background-color: $bright;
   min-height: 100vh;
+  .view {
+    // 減掉 navbar 高度、 footer 高度、 footer padding(1rem) + 中間內容的 margin(2.5rem)
+    min-height: calc(100vh - 63px - 120px - 3.5rem);
+  }
 }
 </style>
