@@ -8,9 +8,7 @@
             :style="{
               backgroundImage: 'url(' + product.imageUrl[0] + ')',
             }"
-          >
-            <!-- <img :src="product.imageUrl[0]" class="card-img-top" /> -->
-          </div>
+          ></div>
         </router-link>
         <div class="d-flex flex-column justify-content-start card-body">
           <h5 class="card-title">{{ product.title }}</h5>
@@ -45,11 +43,16 @@
             </button>
           </div>
           <div class="modal-body no_selection">
-            <div class="modal-img">
-              <img
+            <div
+              class="modal-img"
+              :style="{
+                backgroundImage: 'url(' + addingProduct.imageUrl[0] + ')',
+              }"
+            >
+              <!-- <img
                 :src="addingProduct.imageUrl ? addingProduct.imageUrl[0] : ''"
                 :alt="addingProduct.title"
-              />
+              /> -->
             </div>
             <div class="d-flex justify-content-center align-items-start">
               <font-awesome-icon
@@ -106,7 +109,9 @@ export default {
   },
   data() {
     return {
-      addingProduct: {},
+      addingProduct: {
+        imageUrl: [''],
+      },
       addingQuantity: 0,
     };
   },
@@ -162,11 +167,12 @@ export default {
     }
   }
   .card-body {
-    .card-title {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    // 暫時取消商品標題縮排
+    // .card-title {
+    //   white-space: nowrap;
+    //   overflow: hidden;
+    //   text-overflow: ellipsis;
+    // }
     .card-text {
       overflow: hidden;
       display: -webkit-box;
@@ -208,12 +214,11 @@ export default {
 }
 .modal-body {
   .modal-img {
-    max-height: 400px;
-    overflow: hidden;
+    height: 400px;
     margin-bottom: 1rem;
-    img {
-      width: 100%;
-    }
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
   }
 }
 .icon-quantity {
