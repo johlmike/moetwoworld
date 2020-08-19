@@ -2,7 +2,7 @@
   <footer>
     <div class="container">
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-4 mb-3">
           預留 LOGO 位置
         </div>
         <div class="col-sm-4">
