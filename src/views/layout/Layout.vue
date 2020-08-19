@@ -145,7 +145,8 @@ export default {
     // 減掉 navbar 高度、 footer 高度、 footer padding(1rem) + 中間內容的 margin(2.5rem)
     min-height: calc(100vh - 63px - 120px - 3.5rem);
     @media screen and (max-width: 576px) {
-      min-height: calc(100vh - 63px - 280px - 3.5rem);
+      // 減掉 navbar 高度、 footer 高度、 footer padding(1rem) + 中間內容的 margin(1.5rem)
+      min-height: calc(100vh - 63px - 280px - 2.5rem);
     }
   }
 }
