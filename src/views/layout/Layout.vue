@@ -101,7 +101,20 @@ export default {
         .then(() => {
           loader.hide();
           // 更新本地端購物車
-          this.cart = this.cart.filter( cartItem => cartItem.product.id != id );
+          this.cart = this.cart.filter((cartItem) => cartItem.product.id != id);
+        })
+        .catch((err) => {
+          loader.hide();
+          console.log(err.response);
+        });
+    },
+    deleteAllCart() {
+      const loader = this.$loading.show();
+      const url = `${this.baseUrl}${this.uuid}/ec/shopping/all/product`;
+      this.axios
+        .delete(url)
+        .then(() => {
+          loader.hide();
         })
         .catch((err) => {
           loader.hide();
