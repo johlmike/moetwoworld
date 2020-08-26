@@ -18,14 +18,14 @@
     <div class="collapse navbar-collapse nav-area" id="navbarSupportedContent">
       <div class="left nav-block">
         <router-link to="/" v-slot="{ isActive, href }" exact>
-          <a :href="href" :class="{ 'is-active': isActive }" class="nav-link">
+          <a :href="href" :class="{ 'is-active': isActive }" class="nav-link" @click="hideNavbar">
             <font-awesome-icon :icon="['fas', 'home']" class="nav-icon" />
             <span>回首頁</span>
             <span class="sr-only" v-if="isActive">(current)</span>
           </a>
         </router-link>
         <router-link to="/products" v-slot="{ isActive, href }">
-          <a :href="href" :class="{ 'is-active': isActive }" class="nav-link">
+          <a :href="href" :class="{ 'is-active': isActive }" class="nav-link" @click="hideNavbar">
             <font-awesome-icon :icon="['fas', 'newspaper']" class="nav-icon" />
             <span>商品列表</span>
             <span class="sr-only" v-if="isActive">(current)</span>
@@ -37,14 +37,19 @@
       </div>
       <div class="right nav-block">
         <router-link to="/about" v-slot="{ isActive, href }">
-          <a :href="href" :class="{ 'is-active': isActive }" class="nav-link">
+          <a :href="href" :class="{ 'is-active': isActive }" class="nav-link" @click="hideNavbar">
             <font-awesome-icon :icon="['fas', 'carrot']" class="nav-icon" />
             <span>關於我們</span>
             <span class="sr-only" v-if="isActive">(current)</span>
           </a>
         </router-link>
         <router-link to="/cart" v-slot="{ isActive, href }">
-          <a :href="href" :class="{ 'is-active': isActive }" class="nav-link mb-sm-0 mb-2">
+          <a
+            :href="href"
+            :class="{ 'is-active': isActive }"
+            class="nav-link mb-sm-0 mb-2"
+            @click="hideNavbar"
+          >
             <font-awesome-icon :icon="['fas', 'shopping-cart']" class="nav-icon" />
             <span>購物車</span>
             <span class="sr-only" v-if="isActive">(current)</span>
@@ -56,7 +61,15 @@
 </template>
 
 <script>
-export default {};
+/* global $ */
+
+export default {
+  methods: {
+    hideNavbar() {
+      $('#navbarSupportedContent').collapse('hide');
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
