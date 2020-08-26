@@ -9,10 +9,14 @@
           <div class="col-2">小計</div>
         </div>
         <div class="cart-table-body">
-          <div v-if="cart.length === 0" class="empty">
+          <div v-if="localCart.length === 0" class="empty">
             購物車還空空的喔～快去逛逛吧！
           </div>
-          <div v-for="(cartItem, index) in cart" :key="'cart_' + index" class="body-item row py-3">
+          <div
+            v-for="(cartItem, index) in localCart"
+            :key="'cart_' + index"
+            class="body-item row py-3"
+          >
             <div class="col-5 body-item-title">{{ cartItem.product.title }}</div>
             <div class="col-2 body-item-quantity">
               <input
@@ -55,26 +59,35 @@ export default {
     products: Array,
     cart: Array,
   },
+  data() {
+    return {
+      localCart: [],
+    };
+  },
   methods: {
     updateCart(index) {
-      if (this.cart[index].quantity > 0) {
+      if (this.localCart[index].quantity > 0) {
         // 如果使用者輸入正確的數量(大於 1)，更新購物車
         // 檢查是否超過庫存
         const updatingProduct = this.products.find(
-          (product) => product.id === this.cart[index].product.id
+          (product) => product.id === this.localCart[index].product.id
         );
-        if (this.cart[index].quantity > updatingProduct.options.stock) {
-          this.cart[index].quantity = updatingProduct.options.stock;
+        if (this.localCart[index].quantity > updatingProduct.options.stock) {
+          this.localCart[index].quantity = updatingProduct.options.stock;
         }
-        this.$bus.$emit('updateCart', this.cart[index].product.id, this.cart[index].quantity);
+        this.$bus.$emit(
+          'updateCart',
+          this.localCart[index].product.id,
+          this.localCart[index].quantity
+        );
       } else {
         // 如輸入 0 或 負數，預設使用者是要將數量減少至 1
-        this.cart[index].quantity = 1;
-        this.$bus.$emit('updateCart', this.cart[index].product.id, 1);
+        this.localCart[index].quantity = 1;
+        this.$bus.$emit('updateCart', this.localCart[index].product.id, 1);
       }
     },
     deleteCart(index) {
-      this.$bus.$emit('deleteCart', this.cart[index].product.id);
+      this.$bus.$emit('deleteCart', this.localCart[index].product.id);
     },
   },
   computed: {
@@ -85,6 +98,11 @@ export default {
         sum += cartItemSum;
       });
       return sum;
+    },
+  },
+  watch: {
+    cart() {
+      this.localCart = this._.cloneDeep(this.cart);
     },
   },
 };
