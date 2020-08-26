@@ -44,18 +44,18 @@
           </div>
         </div>
         <div class="cart-table-footer row">
-          <div class="form-inline offset-sm-2 col-sm-7 col-7 coupon">
+          <div class="form-inline offset-sm-2 col-sm-7 col-5 coupon">
             <label for="coupon" class="m-0">優惠券</label>
             <input
               v-model.lazy="coupon"
               type="text"
               name="優惠券"
               id="coupon"
-              class="form-control col-sm-5 col-9 ml-2"
+              class="form-control col-sm-5 col-7 ml-2"
             />
           </div>
-          <div class="col-sm-2 col-3 sum">共 {{ sumPrice }} 元</div>
-          <div class="col-sm-1 col-2 text-center">
+          <div class="col-sm-2 col-4 sum">共 {{ sumPrice }} 元</div>
+          <div class="col-sm-1 col-3 text-center">
             <button type="button" class="btn btn-primary btn-checkout">結帳</button>
           </div>
         </div>
