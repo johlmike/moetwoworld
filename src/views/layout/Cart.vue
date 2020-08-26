@@ -88,7 +88,7 @@ export default {
   background-color: $bright;
 }
 .container {
-  padding-top: 2.5rem;
+  margin-top: 2.5rem;
 }
 .cart-table {
   color: $dark;

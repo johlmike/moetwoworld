@@ -85,6 +85,10 @@ export default {
             loader.hide();
             // 更新本地端之購物車內容
             this.cart.unshift(this._.cloneDeep(res.data.data));
+            this.$swal({
+              text: '成功加入購物車',
+              icon: 'success',
+            });
             if (cb) {
               cb();
             }
@@ -109,6 +113,10 @@ export default {
           loader.hide();
           // 更新本地端購物車之商品數量
           cartProduct.quantity = data.quantity;
+          this.$swal({
+            text: '成功加入購物車',
+            icon: 'success',
+          });
           if (cb) {
             cb();
           }
@@ -116,7 +124,10 @@ export default {
         .catch((err) => {
           loader.hide();
           if (err.response.data.errors[0] === 'quantity 並沒有任何更改。') {
-            this.$swal('已經達到庫存上限囉！');
+            this.$swal({
+              text: '已經達到庫存上限囉！',
+              icon: 'warning',
+            });
           }
           console.log(err.response);
         });

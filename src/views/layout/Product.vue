@@ -88,7 +88,7 @@ export default {
     },
     addCart() {
       this.$bus.$emit('addCart', this.productId, this.quantity, () => {
-        this.$router.push('/cart');
+        this.$router.push('/products');
       });
     },
   },
