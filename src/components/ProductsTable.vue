@@ -123,25 +123,10 @@ export default {
     },
     addCart() {
       if (this.addingQuantity) {
-        // 檢查是否已有在購物車
         const addingId = this.addingProduct.id;
-        if (this.cart.find((cartItem) => cartItem.product.id === addingId)) {
-          // 檢查到重複，改用update
-          this.updateCart();
-        } else {
-          // 沒有重複，新增商品至購物車
-          this.$bus.$emit('addCart', addingId, this.addingQuantity);
-          $('.addCartModal').modal('hide');
-        }
+        this.$bus.$emit('addCart', addingId, this.addingQuantity);
+        $('.addCartModal').modal('hide');
       }
-    },
-    updateCart() {
-      const addingId = this.addingProduct.id;
-      // 找出購物車之商品數量，並將使用者輸入之數量往上加
-      const cartProduct = this.cart.find((cartItem) => cartItem.product.id === addingId);
-      const originalQuantity = cartProduct.quantity;
-      this.$bus.$emit('updateCart', addingId, originalQuantity + this.addingQuantity);
-      $('.addCartModal').modal('hide');
     },
   },
 };

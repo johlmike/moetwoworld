@@ -53,6 +53,9 @@ import {
   faEnvelope,
   faMap,
 } from '@fortawesome/free-solid-svg-icons';
+// sweet alert
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 // 載入 Axios
 Vue.use(VueAxios, axios);
@@ -117,6 +120,11 @@ library.add(
   faMap
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+// 載入 sweet alert
+const options = {
+  confirmButtonColor: '#BC3322',
+};
+Vue.use(VueSweetalert2, options);
 // 實體化 $bus
 Vue.prototype.$bus = new Vue();
 

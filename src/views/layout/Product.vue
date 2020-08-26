@@ -41,35 +41,10 @@
         <div class="col" v-html="product.description"></div>
       </div>
     </div>
-    <div class="modal" tabindex="-1" role="dialog" id="success-modal">
-      <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">加入成功！</h5>
-          </div>
-          <div class="modal-body">
-            <p>{{ successMsg }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal" tabindex="-1" role="dialog" id="error-modal">
-      <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">加入失敗</h5>
-          </div>
-          <div class="modal-body">
-            <p>{{ errorMsg }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
-/* global $ */
 export default {
   props: {
     products: Array,
@@ -111,96 +86,14 @@ export default {
         this.quantity = 1;
       }
     },
-    getCart() {
-      const loader = this.$loading.show();
-      const url = `${this.baseUrl}${this.uuid}/ec/shopping`;
-      this.axios
-        .get(url)
-        .then((res) => {
-          loader.hide();
-          this.cart = res.data.data;
-        })
-        .catch((err) => {
-          loader.hide();
-          console.log(err.response);
-        });
-    },
     addCart() {
-      // 檢查是否已有在購物車
-      if (this.cart.find((cartItem) => cartItem.product.id === this.productId)) {
-        // 檢查到重複，改用update
-        this.updateCart();
-      } else {
-        // 沒有重複，新增商品至購物車
-        const url = `${this.baseUrl}${this.uuid}/ec/shopping`;
-        const data = {
-          product: this.productId,
-          quantity: this.quantity,
-        };
-        const loader = this.$loading.show();
-        this.axios
-          .post(url, data)
-          .then((res) => {
-            loader.hide();
-            // 更新本地端之購物車內容
-            this.cart.unshift(this._.cloneDeep(res.data.data));
-            // 更新加入購物車成功訊息
-            this.successMsg = `目前購物車內有 ${this.quantity} ${this.product.unit}商品`;
-            $('#success-modal').modal('show');
-            setTimeout(() => {
-              $('#success-modal').modal('hide');
-            }, 2000);
-          })
-          .catch((err) => {
-            loader.hide();
-            console.log(err.response);
-          });
-      }
-    },
-    updateCart() {
-      const loader = this.$loading.show();
-      const url = `${this.baseUrl}${this.uuid}/ec/shopping`;
-      const updateProduct = this.cart.find((cartItem) => cartItem.product.id === this.productId);
-      const updateProductQuantity = updateProduct.quantity;
-      let addingQuantity = this.quantity;
-      if (this.quantity + updateProductQuantity > this.product.options.stock) {
-        addingQuantity = this.product.options.stock;
-      } else {
-        addingQuantity = this.quantity + updateProductQuantity;
-      }
-      const data = {
-        product: this.productId,
-        quantity: addingQuantity,
-      };
-      this.axios
-        .patch(url, data)
-        .then(() => {
-          loader.hide();
-          // 更新本地端購物車資訊
-          updateProduct.quantity = addingQuantity;
-          // 更新加入購物車成功訊息
-          this.successMsg = `目前購物車內有 ${addingQuantity} ${this.product.unit}商品`;
-          $('#success-modal').modal('show');
-          setTimeout(() => {
-            $('#success-modal').modal('hide');
-          }, 2000);
-        })
-        .catch((err) => {
-          loader.hide();
-          if (err.response.data.errors[0] === 'quantity 並沒有任何更改。') {
-            this.errorMsg = '購物車之商品數量已達庫存上限';
-          }
-          $('#error-modal').modal('show');
-          setTimeout(() => {
-            $('#error-modal').modal('hide');
-          }, 2000);
-          console.log(err.response);
-        });
+      this.$bus.$emit('addCart', this.productId, this.quantity, () => {
+        this.$router.push('/cart');
+      });
     },
   },
   created() {
     this.getProduct();
-    this.getCart();
   },
 };
 </script>

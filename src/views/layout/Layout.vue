@@ -35,6 +35,11 @@ export default {
           // 如果商品列表超過一頁且尚未讀取完畢，再執行一次 getProducts
           if (currentPage < this.totalPages) {
             this.getProducts(page + 1);
+          } else {
+            // 所有商品讀取完畢，轉換 options 字串為物件
+            this.products.forEach((product) => {
+              product.options = JSON.parse(product.options);
+            });
           }
         })
         .catch((res) => {
@@ -55,26 +60,42 @@ export default {
           console.log(err.response);
         });
     },
-    addCart(id, quantity) {
+    addCart(id, quantity, cb) {
       const loader = this.$loading.show();
       const url = `${this.baseUrl}${this.uuid}/ec/shopping`;
       const data = {
         product: id,
         quantity,
       };
-      this.axios
-        .post(url, data)
-        .then((res) => {
-          loader.hide();
-          // 更新本地端之購物車內容
-          this.cart.unshift(this._.cloneDeep(res.data.data));
-        })
-        .catch((err) => {
-          loader.hide();
-          console.log(err.response);
-        });
+      if (this.cart.find((cartItem) => cartItem.product.id === id)) {
+        loader.hide();
+        const originQuantity = this.cart.find((cartItem) => cartItem.product.id === id).quantity;
+        const updatingProduct = this.products.find((product) => product.id === id);
+        let addQuantity = originQuantity + quantity;
+        // 使用者新增之數量會超過庫存，更新 quantity 為庫存上限
+        if (addQuantity > updatingProduct.options.stock) {
+          addQuantity = updatingProduct.options.stock;
+        }
+        // 檢查到重複，改用update
+        this.updateCart(id, addQuantity, cb);
+      } else {
+        this.axios
+          .post(url, data)
+          .then((res) => {
+            loader.hide();
+            // 更新本地端之購物車內容
+            this.cart.unshift(this._.cloneDeep(res.data.data));
+            if (cb) {
+              cb();
+            }
+          })
+          .catch((err) => {
+            loader.hide();
+            console.log(err.response);
+          });
+      }
     },
-    updateCart(id, quantity) {
+    updateCart(id, quantity, cb) {
       const loader = this.$loading.show();
       const url = `${this.baseUrl}${this.uuid}/ec/shopping`;
       const cartProduct = this.cart.find((cartItem) => cartItem.product.id === id);
@@ -88,9 +109,15 @@ export default {
           loader.hide();
           // 更新本地端購物車之商品數量
           cartProduct.quantity = data.quantity;
+          if (cb) {
+            cb();
+          }
         })
         .catch((err) => {
           loader.hide();
+          if (err.response.data.errors[0] === 'quantity 並沒有任何更改。') {
+            this.$swal('已經達到庫存上限囉！');
+          }
           console.log(err.response);
         });
     },
@@ -129,6 +156,7 @@ export default {
     this.getProducts();
     this.getCart();
     // 監聽購物車事件
+    this.$bus.$on('getCart', this.getCart);
     this.$bus.$on('addCart', this.addCart);
     this.$bus.$on('updateCart', this.updateCart);
     this.$bus.$on('deleteCart', this.deleteCart);
