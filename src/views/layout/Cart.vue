@@ -44,17 +44,30 @@
           </div>
         </div>
         <div class="cart-table-footer row">
-          <div class="form-inline offset-sm-2 col-sm-7 col-5 coupon">
+          <!-- <div class="form-inline offset-sm-2 col-sm-7 col-12 coupon">
             <label for="coupon" class="m-0">優惠券</label>
             <input
               v-model.lazy="coupon"
               type="text"
               name="優惠券"
               id="coupon"
-              class="form-control col-sm-5 col-8 ml-2"
+              class="form-control ml-2"
+            />
+          </div> -->
+          <div class="input-group offset-sm-4 col-sm-5 col-12 mb-sm-0 mb-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="coupon">優惠券</span>
+            </div>
+            <input
+              v-model.lazy="coupon"
+              type="text"
+              class="form-control"
+              aria-label="coupon"
+              aria-describedby="coupon"
+              style="height: auto;"
             />
           </div>
-          <div class="col-sm-2 col-4 sum">共 {{ sumPrice }} 元</div>
+          <div class="offset-sm-0 offset-5 col-sm-2 col-4 sum">共 {{ sumPrice }} 元</div>
           <div class="col-sm-1 col-3 text-center">
             <button type="button" class="btn btn-primary btn-checkout">結帳</button>
           </div>
@@ -175,10 +188,10 @@ export default {
   .cart-table-footer {
     border-top: 1px solid $dark;
     padding-top: 1rem;
-    .coupon {
-      text-align: center;
-      line-height: 2.5rem;
-    }
+    // .coupon {
+    //   text-align: center;
+    //   line-height: 2.5rem;
+    // }
     .sum {
       text-align: center;
       line-height: 2.5rem;
