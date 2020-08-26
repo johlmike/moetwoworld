@@ -184,11 +184,11 @@ export default {
   background-color: $bright;
   min-height: 100vh;
   .view {
-    // 減掉 navbar 高度、 footer 高度、 footer padding(1rem) + 中間內容的 margin(2.5rem)
-    min-height: calc(100vh - 63px - 120px - 3.5rem);
+    // 減掉 navbar 高度、 footer 高度、 footer padding(1rem) + 中間內容的 margin(2.5rem) + border 2px
+    min-height: calc(100vh - 63px - 120px - 3.5rem - 2px);
     @media screen and (max-width: 576px) {
-      // 減掉 navbar 高度、 footer 高度、 footer padding(1rem) + 中間內容的 margin(1.5rem)
-      min-height: calc(100vh - 63px - 280px - 2.5rem);
+      // 減掉 navbar 高度、 footer 高度、 footer padding(1rem) + 中間內容的 margin(1.5rem) + border 2px
+      min-height: calc(100vh - 63px - 280px - 2.5rem - 2px);
     }
   }
 }
