@@ -125,7 +125,7 @@ export default {
           loader.hide();
           if (err.response.data.errors[0] === 'quantity 並沒有任何更改。') {
             this.$swal({
-              text: '已經達到庫存上限囉！',
+              text: '已達到庫存上限',
               icon: 'warning',
             });
           }
