@@ -114,7 +114,7 @@ export default {
           // 更新本地端購物車之商品數量
           cartProduct.quantity = data.quantity;
           this.$swal({
-            text: '成功加入購物車',
+            text: '成功更新購物車',
             icon: 'success',
           });
           if (cb) {
