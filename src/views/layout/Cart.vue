@@ -105,6 +105,9 @@ export default {
       this.localCart = this._.cloneDeep(this.cart);
     },
   },
+  created() {
+    this.localCart = this._.cloneDeep(this.cart);
+  },
 };
 </script>
 
