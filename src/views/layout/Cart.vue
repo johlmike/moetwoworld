@@ -23,7 +23,7 @@
                 type="number"
                 name="數量"
                 min="1"
-                v-model.lazy="cartItem.quantity"
+                v-model.lazy.number="cartItem.quantity"
                 @change="updateCart(index)"
                 class="form-control mr-2"
               />
