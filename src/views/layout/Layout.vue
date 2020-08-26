@@ -133,7 +133,6 @@ export default {
         });
     },
     deleteCart(id) {
-      console.log('刪除購物車');
       const loader = this.$loading.show();
       const url = `${this.baseUrl}${this.uuid}/ec/shopping/${id}`;
       this.axios
@@ -142,6 +141,10 @@ export default {
           loader.hide();
           // 更新本地端購物車
           this.cart = this.cart.filter((cartItem) => cartItem.product.id != id);
+          this.$swal({
+            text: '刪除成功',
+            icon: 'success',
+          });
         })
         .catch((err) => {
           loader.hide();
