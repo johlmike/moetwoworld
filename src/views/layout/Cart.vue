@@ -3,10 +3,11 @@
     <div class="container">
       <div class="cart-table pb-5">
         <div class="cart-table-head row">
-          <div class="col-5">商品名稱</div>
-          <div class="col-2">數量</div>
-          <div class="col-2">單價</div>
-          <div class="col-2">小計</div>
+          <div class="col-sm-5 col-5">商品名稱</div>
+          <div class="col-sm-2 col-3">數量</div>
+          <div class="col-sm-2 col-3">單價</div>
+          <div class="col-sm-2 d-sm-block d-none">小計</div>
+          <div class="col-sm-1 col-1"></div>
         </div>
         <div class="cart-table-body">
           <div v-if="localCart.length === 0" class="empty">
@@ -17,8 +18,8 @@
             :key="'cart_' + index"
             class="body-item row py-3"
           >
-            <div class="col-5 body-item-title">{{ cartItem.product.title }}</div>
-            <div class="col-2 body-item-quantity">
+            <div class="col-sm-5 col-5 body-item-title">{{ cartItem.product.title }}</div>
+            <div class="col-sm-2 col-3 body-item-quantity">
               <input
                 type="number"
                 name="數量"
@@ -29,11 +30,11 @@
               />
               {{ cartItem.product.unit }}
             </div>
-            <div class="col-2 body-item-price">NT$ {{ cartItem.product.price }}</div>
-            <div class="col-2 body-item-total">
-              NT$ {{ cartItem.product.price * cartItem.quantity }}
+            <div class="col-sm-2 col-3 body-item-price">${{ cartItem.product.price }}</div>
+            <div class="col-sm-2 col-2 body-item-total d-sm-flex d-none">
+              ${{ cartItem.product.price * cartItem.quantity }}
             </div>
-            <div class="col-1 body-item-delete">
+            <div class="col-sm-1 col-1 body-item-delete">
               <font-awesome-icon
                 :icon="['fas', 'trash-alt']"
                 class="icon-delete"
@@ -43,8 +44,18 @@
           </div>
         </div>
         <div class="cart-table-footer row">
-          <div class="offset-9 col-2 sum">共 NT$ {{ sumPrice }} 元</div>
-          <div class="col-1 text-center">
+          <div class="form-inline offset-sm-2 col-sm-7 col-7 coupon">
+            <label for="coupon" class="m-0">優惠券</label>
+            <input
+              v-model.lazy="coupon"
+              type="text"
+              name="優惠券"
+              id="coupon"
+              class="form-control col-sm-5 col-9 ml-2"
+            />
+          </div>
+          <div class="col-sm-2 col-3 sum">共 {{ sumPrice }} 元</div>
+          <div class="col-sm-1 col-2 text-center">
             <button type="button" class="btn btn-primary btn-checkout">結帳</button>
           </div>
         </div>
@@ -62,6 +73,8 @@ export default {
   data() {
     return {
       localCart: [],
+      coupon: '',
+      percent: 100,
     };
   },
   methods: {
@@ -97,7 +110,7 @@ export default {
         const cartItemSum = cartItem.product.price * cartItem.quantity;
         sum += cartItemSum;
       });
-      return sum;
+      return (sum * this.percent) / 100;
     },
   },
   watch: {
@@ -162,6 +175,10 @@ export default {
   .cart-table-footer {
     border-top: 1px solid $dark;
     padding-top: 1rem;
+    .coupon {
+      text-align: center;
+      line-height: 2.5rem;
+    }
     .sum {
       text-align: center;
       line-height: 2.5rem;

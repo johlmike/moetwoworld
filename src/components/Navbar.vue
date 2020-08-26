@@ -44,7 +44,7 @@
           </a>
         </router-link>
         <router-link to="/cart" v-slot="{ isActive, href }">
-          <a :href="href" :class="{ 'is-active': isActive }" class="nav-link">
+          <a :href="href" :class="{ 'is-active': isActive }" class="nav-link mb-sm-0 mb-2">
             <font-awesome-icon :icon="['fas', 'shopping-cart']" class="nav-icon" />
             <span>購物車</span>
             <span class="sr-only" v-if="isActive">(current)</span>
