@@ -51,7 +51,7 @@
               type="text"
               name="優惠券"
               id="coupon"
-              class="form-control col-sm-5 col-7 ml-2"
+              class="form-control col-sm-5 col-8 ml-2"
             />
           </div>
           <div class="col-sm-2 col-4 sum">共 {{ sumPrice }} 元</div>
