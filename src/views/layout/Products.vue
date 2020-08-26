@@ -56,7 +56,7 @@ export default {
 <style lang="scss" scoped>
 .products {
   margin-top: 2.5rem;
-  @media screen and (max-width: 576px){
+  @media screen and (max-width: 576px) {
     margin-top: 1.5rem;
   }
 }
