@@ -59,6 +59,13 @@ export default {
     updateCart(index) {
       if (this.cart[index].quantity > 0) {
         // 如果使用者輸入正確的數量(大於 1)，更新購物車
+        // 檢查是否超過庫存
+        const updatingProduct = this.products.find(
+          (product) => product.id === this.cart[index].product.id
+        );
+        if (this.cart[index].quantity > updatingProduct.options.stock) {
+          this.cart[index].quantity = updatingProduct.options.stock;
+        }
         this.$bus.$emit('updateCart', this.cart[index].product.id, this.cart[index].quantity);
       } else {
         // 如輸入 0 或 負數，預設使用者是要將數量減少至 1
