@@ -1,5 +1,5 @@
 <template>
-  <div class="carousel slide" data-ride="carousel">
+  <div class="carousel slide carousel-fade" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img :src="`${publicPath}img/carousel-1.jpg`" class="d-block w-100" alt="#" />
@@ -14,7 +14,12 @@
     <div class="mouse" :class="{ hide: !isTop }">
       <font-awesome-icon :icon="['fas', 'chevron-down']" class="icon-cart" />
     </div>
-    <div class="cover"></div>
+    <div class="cover">
+      <div class="text">
+        <h1 class="first">萌兔窩</h1>
+        <h2 class="second">細心呵護您的小萌寵</h2>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -48,6 +53,38 @@ export default {
     width: 100vw;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .text {
+      display: flex;
+      color: white;
+      height: 50%;
+      width: 0%;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      white-space: nowrap;
+      animation: fade 3.5s;
+      animation-delay: 1s;
+      animation-fill-mode: forwards;
+      .first {
+        font-size: 5rem;
+      }
+      .second {
+        font-size: 5rem;
+        align-self: flex-end;
+      }
+    }
+  }
+}
+
+@keyframes fade {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 60%;
   }
 }
 
@@ -68,6 +105,7 @@ export default {
   left: 0;
   right: 0;
   margin: auto;
+  z-index: 4;
   -webkit-animation: mouse 0.8s infinite;
 }
 @-webkit-keyframes mouse {
