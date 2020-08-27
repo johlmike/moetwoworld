@@ -49,7 +49,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
@@ -68,12 +68,27 @@ export default {
       animation: fade 3.5s;
       animation-delay: 1s;
       animation-fill-mode: forwards;
+      // 手機版改變寬度和高度
+      @media screen and (max-width: 576px) {
+        height: 90%;
+        animation: fadeMobile 3.5s;
+        animation-delay: 1s;
+        animation-fill-mode: forwards;
+      }
       .first {
         font-size: 5rem;
+        // 手機版改字體大小
+        @media screen and (max-width: 576px) {
+          font-size: 2.5rem;
+        }
       }
       .second {
         font-size: 5rem;
         align-self: flex-end;
+        // 手機版改字體大小
+        @media screen and (max-width: 576px) {
+          font-size: 2.5rem;
+        }
       }
     }
   }
@@ -85,6 +100,14 @@ export default {
   }
   100% {
     width: 60%;
+  }
+}
+@keyframes fadeMobile {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 95%;
   }
 }
 
