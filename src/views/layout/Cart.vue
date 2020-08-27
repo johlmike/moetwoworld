@@ -44,16 +44,6 @@
           </div>
         </div>
         <div class="cart-table-footer row">
-          <!-- <div class="form-inline offset-sm-2 col-sm-7 col-12 coupon">
-            <label for="coupon" class="m-0">優惠券</label>
-            <input
-              v-model.lazy="coupon"
-              type="text"
-              name="優惠券"
-              id="coupon"
-              class="form-control ml-2"
-            />
-          </div> -->
           <div class="input-group offset-sm-4 col-sm-5 col-12 mb-sm-0 mb-2">
             <div class="input-group-prepend">
               <span class="input-group-text" id="coupon">優惠券</span>

@@ -14,6 +14,7 @@
     <div class="mouse" :class="{ hide: !isTop }">
       <font-awesome-icon :icon="['fas', 'chevron-down']" class="icon-cart" />
     </div>
+    <div class="cover"></div>
   </div>
 </template>
 
@@ -38,6 +39,15 @@ export default {
   }
   .carousel-inner {
     max-height: 100vh;
+  }
+  .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
   }
 }
 
