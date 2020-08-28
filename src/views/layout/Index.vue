@@ -2,10 +2,18 @@
   <div class="home">
     <Carousel :isTop="isTop"></Carousel>
     <div class="container">
-      <Swiper title="小萌寵的最愛" :products="products" class="my-3"></Swiper>
-      <Swiper title="小萌寵吃得飽" :products="products" class="my-3"></Swiper>
-      <Swiper title="小萌寵住得好" :products="products" class="my-3"></Swiper>
-      <Swiper title="小萌寵好健康" :products="products" class="my-3"></Swiper>
+      <Swiper title="小萌寵的最愛" :products="hotProducts" class="my-3"></Swiper>
+      <Swiper
+        title="小萌寵吃得飽"
+        :products="filtedProducts('主食飼料', '點心零食')"
+        class="my-3"
+      ></Swiper>
+      <Swiper
+        title="小萌寵住得好"
+        :products="filtedProducts('居家籠/便盆', '木屑/砂')"
+        class="my-3"
+      ></Swiper>
+      <Swiper title="小萌寵好健康" :products="filtedProducts('營養保健品')" class="my-3"></Swiper>
     </div>
   </div>
 </template>
@@ -36,6 +44,18 @@ export default {
       } else {
         this.isTop = true; // 最上方
       }
+    },
+    filtedProducts(...category) {
+      return this.products.filter((product) => {
+        return category.includes(product.category);
+      });
+    },
+  },
+  computed: {
+    hotProducts() {
+      return this.products.filter((product) => {
+        product.options.hot === true;
+      });
     },
   },
   mounted() {

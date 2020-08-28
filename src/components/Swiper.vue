@@ -55,7 +55,7 @@ export default {
       swiperOption: {
         loop: true,
         autoplay: {
-          delay: 1000,
+          delay: 1500,
         },
         speed: 3000,
         slidesPerView: 4,
