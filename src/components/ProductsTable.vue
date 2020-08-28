@@ -15,8 +15,8 @@
           </div>
         </router-link>
         <div class="d-flex flex-column justify-content-start card-body">
-          <h5 class="card-title">{{ product.title }}</h5>
-          <p class="card-text">{{ product.content }}</p>
+          <h5 class="card-title ellipsis">{{ product.title }}</h5>
+          <p class="card-text ellipsis">{{ product.content }}</p>
           <div class="card-price">
             <div class="origin-price">{{ `NT\$ ${product.origin_price}` }}</div>
             <div class="price">{{ `NT\$ ${product.price}` }}</div>
@@ -168,19 +168,7 @@ export default {
     }
   }
   .card-body {
-    // 暫時取消商品標題縮排
-    // .card-title {
-    //   white-space: nowrap;
-    //   overflow: hidden;
-    //   text-overflow: ellipsis;
-    // }
     .card-text {
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      height: 3rem;
-      text-overflow: ellipsis;
       text-align: left;
     }
     .card-price {
@@ -231,6 +219,14 @@ export default {
   width: 4rem;
   margin-left: 1rem;
   margin-right: 1rem;
+}
+.ellipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; //最大行數
+  height: 3rem; //固定高度
+  text-overflow: ellipsis;
 }
 // 隱藏 input type=number 的箭頭
 input::-webkit-outer-spin-button,

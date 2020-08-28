@@ -19,8 +19,8 @@
               </div>
             </router-link>
             <div class="d-flex flex-column justify-content-start card-body">
-              <h5 class="card-title">{{ product.title }}</h5>
-              <p class="card-text">{{ product.content }}</p>
+              <h5 class="card-title ellipsis">{{ product.title }}</h5>
+              <p class="card-text ellipsis">{{ product.content }}</p>
               <div class="card-price">
                 <div class="origin-price">{{ `NT\$ ${product.origin_price}` }}</div>
                 <div class="price">{{ `NT\$ ${product.price}` }}</div>
@@ -101,6 +101,14 @@ export default {
   h3 {
     color: $dark;
   }
+  .ellipsis {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; //最大行數
+    height: 3rem; //固定高度
+    text-overflow: ellipsis;
+  }
   .slide {
     .swiper-slide {
       .card {
@@ -136,12 +144,6 @@ export default {
         }
         .card-body {
           .card-text {
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            height: 3rem;
-            text-overflow: ellipsis;
             text-align: left;
           }
           .card-price {
