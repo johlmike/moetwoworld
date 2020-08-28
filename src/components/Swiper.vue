@@ -67,6 +67,31 @@ export default {
       },
     };
   },
+  methods: {
+    checkMobile() {
+      if (this.isMobileDevice()) {
+        this.swiperOption.slidesPerView = 1;
+      } else {
+        this.swiperOption.slidesPerView = 4;
+      }
+    },
+    isMobileDevice() {
+      const mobileDevice = [
+        'Android',
+        'webOS',
+        'iPhone',
+        // 'iPad',
+        'iPod',
+        'BlackBerry',
+        'Windows Phone',
+      ];
+      let isMobileDevice = mobileDevice.some((e) => navigator.userAgent.match(e));
+      return isMobileDevice;
+    },
+  },
+  created() {
+    this.checkMobile();
+  },
 };
 </script>
 

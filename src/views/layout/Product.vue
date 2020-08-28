@@ -19,7 +19,7 @@
               <span class="sale-price">售價： {{ product.price }} 元</span>
               <form class="form-inline justify-content-end mt-2">
                 <button class="btn btn-link mr-auto" type="button" @click="$router.go(-1)">
-                  返回列表
+                  上一頁
                 </button>
                 <input
                   type="number"
