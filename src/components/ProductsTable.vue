@@ -136,6 +136,7 @@ export default {
   font-weight: bold;
 }
 .card {
+  color: $dark;
   border: 0;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   .card-top {
