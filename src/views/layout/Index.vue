@@ -1,11 +1,18 @@
 <template>
   <div class="home">
     <Carousel :isTop="isTop"></Carousel>
+    <div class="container">
+      <Swiper title="小萌寵的最愛" :products="products" class="my-3"></Swiper>
+      <Swiper title="小萌寵吃得飽" :products="products" class="my-3"></Swiper>
+      <Swiper title="小萌寵住得好" :products="products" class="my-3"></Swiper>
+      <Swiper title="小萌寵好健康" :products="products" class="my-3"></Swiper>
+    </div>
   </div>
 </template>
 
 <script>
 import Carousel from '@/components/Carousel.vue';
+import Swiper from '@/components/Swiper.vue';
 
 export default {
   props: {
@@ -14,6 +21,7 @@ export default {
   },
   components: {
     Carousel,
+    Swiper,
   },
   data() {
     return {

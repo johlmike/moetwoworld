@@ -8,7 +8,11 @@
             :style="{
               backgroundImage: 'url(' + product.imageUrl[0] + ')',
             }"
-          ></div>
+          >
+            <div class="cover">
+              查看更多
+            </div>
+          </div>
         </router-link>
         <div class="d-flex flex-column justify-content-start card-body">
           <h5 class="card-title">{{ product.title }}</h5>
@@ -48,12 +52,7 @@
               :style="{
                 backgroundImage: 'url(' + addingProduct.imageUrl[0] + ')',
               }"
-            >
-              <!-- <img
-                :src="addingProduct.imageUrl ? addingProduct.imageUrl[0] : ''"
-                :alt="addingProduct.title"
-              /> -->
-            </div>
+            ></div>
             <div class="d-flex justify-content-center align-items-start">
               <font-awesome-icon
                 :icon="['fas', 'minus-square']"
@@ -146,9 +145,25 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto 100%;
+    .cover {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      font-size: 2rem;
+      color: white;
+      text-align: center;
+    }
     &:hover {
       background-size: auto 120%;
       transition-duration: 500ms;
+      .cover {
+        opacity: 1;
+        transition-duration: 500ms;
+      }
     }
   }
   .card-body {
