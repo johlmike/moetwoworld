@@ -54,7 +54,7 @@ export default {
   computed: {
     hotProducts() {
       return this.products.filter((product) => {
-        product.options.hot === true;
+        return product.options.hot === true;
       });
     },
   },
