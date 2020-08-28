@@ -40,6 +40,23 @@ export default {
             this.products.forEach((product) => {
               product.options = JSON.parse(product.options);
             });
+            // 重新排序所有商品，符合分類順序
+            let filtedProducts = [];
+            const categoryList = [
+              '所有商品',
+              '主食飼料',
+              '點心零食',
+              '營養保健品',
+              '居家籠/便盆',
+              '木屑/砂',
+            ];
+            categoryList.forEach((category) => {
+              filtedProducts = [
+                ...filtedProducts,
+                ...this.products.filter((product) => product.category === category),
+              ];
+            });
+            this.products = this._.cloneDeep(filtedProducts);
           }
         })
         .catch((res) => {
