@@ -33,7 +33,7 @@ export default {
     return {
       baseUrl: process.env.VUE_APP_BASEURL,
       uuid: process.env.VUE_APP_UUID,
-      categoryList: ['所有商品', '主食飼料', '點心零食', '營養保健品', '居家籠便盆', '木屑/砂'],
+      categoryList: ['所有商品', '主食飼料', '點心零食', '營養保健品', '居家籠/便盆', '木屑/砂'],
       activeCategory: '所有商品',
     };
   },
