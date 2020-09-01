@@ -44,21 +44,40 @@
           </div>
         </div>
         <div class="cart-table-footer row">
-          <div class="input-group offset-sm-4 col-sm-5 col-12 mb-sm-0 mb-2">
+          <div class="input-group col-sm-5 mb-sm-0 mb-2 h-100">
             <div class="input-group-prepend">
               <span class="input-group-text" id="coupon">優惠券</span>
             </div>
             <input
               v-model.lazy="coupon"
               type="text"
-              class="form-control"
+              id="input-coupon"
+              class="form-control text-center"
               aria-label="coupon"
               aria-describedby="coupon"
               style="height: auto;"
+              @change="checkCoupon"
             />
           </div>
-          <div class="offset-sm-0 offset-5 col-sm-2 col-4 sum">共 {{ sumPrice }} 元</div>
-          <div class="col-sm-1 col-3 text-center">
+          <div class="col-sm-4 coupon">
+            <div v-for="(coupon, index) in coupons" :key="coupon.code">
+              {{ coupon.title }} - {{ coupon.code }}
+              <font-awesome-icon
+                class="ml-2 btn-delete-coupon"
+                :icon="['fas', 'times-circle']"
+                @click="deleteCoupon(index)"
+              />
+            </div>
+          </div>
+          <div class="col-sm-2 sum" v-show="!coupons.length">總價： {{ sumPrice }} 元</div>
+          <div class="col-sm-2 sum" v-show="coupons.length">
+            <span class="discountNum">
+              >>折扣： {{ Math.floor(sumPrice - discountedPrice) }} 元
+            </span>
+            <br />
+            特價： {{ discountedPrice }} 元
+          </div>
+          <div class="col-sm-1 text-center">
             <button type="button" class="btn btn-primary btn-checkout">結帳</button>
           </div>
         </div>
@@ -75,9 +94,11 @@ export default {
   },
   data() {
     return {
+      baseUrl: process.env.VUE_APP_BASEURL,
+      uuid: process.env.VUE_APP_UUID,
       localCart: [],
+      coupons: [],
       coupon: '',
-      percent: 100,
     };
   },
   methods: {
@@ -105,15 +126,80 @@ export default {
     deleteCart(index) {
       this.$bus.$emit('deleteCart', this.localCart[index].product.id);
     },
+    checkCoupon() {
+      if (this.coupon) {
+        const loader = this.$loading.show();
+        const url = `${this.baseUrl}${this.uuid}/ec/coupon/search`;
+        this.axios
+          .post(url, { code: this.coupon })
+          .then((res) => {
+            loader.hide();
+            this.coupon = '';
+            const nowTimestamp = new Date().getTime();
+            const deadlineTimestamp = res.data.data.deadline.timestamp * 1000;
+            // 有此優惠券，檢查是否已過期
+            if (nowTimestamp > deadlineTimestamp) {
+              this.$swal({
+                text: '優惠券已過期',
+                icon: 'error',
+              });
+            } else {
+              // 沒有過期，檢查是否已輸入
+              const isRepeat = this.coupons.some((coupon) => {
+                return coupon.code === res.data.data.code;
+              });
+              if (isRepeat) {
+                this.$swal({
+                  text: '優惠券已存在',
+                  icon: 'error',
+                });
+              } else {
+                this.$swal({
+                  text: '優惠券加入成功',
+                  icon: 'success',
+                });
+                this.coupons = [res.data.data, ...this.coupons];
+              }
+            }
+          })
+          .catch((err) => {
+            loader.hide();
+            this.coupon = '';
+            if (err.response.data.message === '該 COUPON 序號並不存在。') {
+              this.$swal({
+                text: '優惠券輸入錯誤',
+                icon: 'error',
+              });
+            } else {
+              console.log(err.response);
+            }
+          });
+      }
+    },
+    deleteCoupon(index) {
+      this.coupons.splice(index, 1);
+    },
   },
   computed: {
+    discountedPrice() {
+      return Math.ceil((this.sumPrice * this.discount) / 100);
+    },
     sumPrice() {
       let sum = 0;
       this.cart.forEach((cartItem) => {
         const cartItemSum = cartItem.product.price * cartItem.quantity;
         sum += cartItemSum;
       });
-      return (sum * this.percent) / 100;
+      return sum;
+    },
+    discount() {
+      let percent = 100;
+      if (this.coupons.length) {
+        this.coupons.forEach((coupon) => {
+          percent = (percent * coupon.percent) / 100;
+        });
+      }
+      return percent;
     },
   },
   watch: {
@@ -178,19 +264,23 @@ export default {
   .cart-table-footer {
     border-top: 1px solid $dark;
     padding-top: 1rem;
-    // .coupon {
-    //   text-align: center;
-    //   line-height: 2.5rem;
-    // }
+    .coupon {
+      text-align: center;
+      line-height: 2.5rem;
+      font-weight: 100;
+      .btn-delete-coupon {
+        cursor: pointer;
+      }
+    }
     .sum {
       text-align: center;
       line-height: 2.5rem;
+      .discountNum {
+        color: gray;
+      }
     }
     .btn-checkout {
-      background-color: $dark;
-      color: $bright;
-      border: 0;
-      height: 2.5rem;
+      width: 100%;
     }
   }
 }

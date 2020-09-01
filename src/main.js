@@ -52,6 +52,7 @@ import {
   faPhone,
   faEnvelope,
   faMap,
+  faTimesCircle,
 } from '@fortawesome/free-solid-svg-icons';
 // sweet alert
 import VueSweetalert2 from 'vue-sweetalert2';
@@ -117,7 +118,8 @@ library.add(
   faSignOutAlt,
   faPhone,
   faEnvelope,
-  faMap
+  faMap,
+  faTimesCircle
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 // 載入 sweet alert
