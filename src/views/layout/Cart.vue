@@ -69,8 +69,8 @@
               />
             </div>
           </div>
-          <div class="col-sm-2 sum" v-show="!coupons.length">總價： {{ sumPrice }} 元</div>
-          <div class="col-sm-2 sum" v-show="coupons.length">
+          <div class="col-sm-2 sum" v-show="coupons.length === 0">總價： {{ sumPrice }} 元</div>
+          <div class="col-sm-2 sum" v-show="coupons.length > 0">
             <span class="discountNum">
               >>折扣： {{ Math.floor(sumPrice - discountedPrice) }} 元
             </span>
@@ -78,7 +78,11 @@
             特價： {{ discountedPrice }} 元
           </div>
           <div class="col-sm-1 text-center">
-            <button type="button" class="btn btn-primary btn-checkout">結帳</button>
+            <router-link to="/checkout">
+              <button type="button" class="btn btn-primary btn-checkout">
+                結帳
+              </button>
+            </router-link>
           </div>
         </div>
       </div>
@@ -91,13 +95,13 @@ export default {
   props: {
     products: Array,
     cart: Array,
+    coupons: Array,
   },
   data() {
     return {
       baseUrl: process.env.VUE_APP_BASEURL,
       uuid: process.env.VUE_APP_UUID,
       localCart: [],
-      coupons: [],
       coupon: '',
     };
   },
@@ -158,7 +162,7 @@ export default {
                   text: '優惠券加入成功',
                   icon: 'success',
                 });
-                this.coupons = [res.data.data, ...this.coupons];
+                this.$bus.$emit('setCoupons', [...this.coupons, res.data.data]);
               }
             }
           })
@@ -177,7 +181,12 @@ export default {
       }
     },
     deleteCoupon(index) {
-      this.coupons.splice(index, 1);
+      this.$bus.$emit(
+        'setCoupons',
+        this.coupons.filter((coupon, couponIndex) => {
+          return couponIndex !== index;
+        })
+      );
     },
   },
   computed: {

@@ -32,6 +32,11 @@ const routes = [
         name: '購物車',
         component: () => import('../views/layout/Cart.vue'),
       },
+      {
+        path: '/checkout',
+        name: '結帳',
+        component: () => import('../views/layout/Checkout.vue'),
+      },
     ],
   },
   // 巢狀路由

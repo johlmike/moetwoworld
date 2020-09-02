@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <Navbar></Navbar>
-    <router-view :products="products" :cart="cart" class="view"></router-view>
+    <router-view :products="products" :cart="cart" :coupons="coupons" class="view"></router-view>
     <Footer></Footer>
   </div>
 </template>
@@ -19,6 +19,7 @@ export default {
       products: [],
       totalPage: 1,
       cart: [],
+      coupons: [],
     };
   },
   methods: {
@@ -181,6 +182,13 @@ export default {
           console.log(err.response);
         });
     },
+    setCoupons(coupons) {
+      this.coupons = coupons;
+    },
+    orderSent() {
+      this.cart = [];
+      this.coupons = [];
+    },
   },
   created() {
     // 由 layout 控制商品列表和購物車，減少 Ajax 讀取次數
@@ -192,6 +200,8 @@ export default {
     this.$bus.$on('updateCart', this.updateCart);
     this.$bus.$on('deleteCart', this.deleteCart);
     this.$bus.$on('deleteAllCart', this.deleteAllCart);
+    this.$bus.$on('setCoupons', this.setCoupons);
+    this.$bus.$on('orderSent', this.orderSent);
   },
 };
 </script>
