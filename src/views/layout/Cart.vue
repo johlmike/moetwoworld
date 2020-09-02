@@ -225,9 +225,10 @@ export default {
 <style lang="scss" scoped>
 .cart {
   background-color: $bright;
-}
-.container {
   margin-top: 2.5rem;
+  @media screen and (max-width: 576px) {
+    margin-top: 1.5rem;
+  }
 }
 .cart-table {
   color: $dark;

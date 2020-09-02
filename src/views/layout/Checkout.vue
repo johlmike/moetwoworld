@@ -2,7 +2,7 @@
   <div class="checkout">
     <div class="container">
       <div class="row">
-        <div class="customer col-sm-7 py-2">
+        <div class="customer col-sm-7 py-4 order-2 order-sm-1">
           <h3>客戶資料</h3>
           <hr />
           <div class="row mb-4">
@@ -96,9 +96,12 @@
             </ValidationObserver>
           </div>
         </div>
-        <div class="order col-sm-5 py-2">
+        <div class="order col-sm-5 py-4 order-1 order-sm-2">
           <h3>訂單明細</h3>
           <hr />
+          <div v-if="cart.length === 0" class="empty">
+            購物車還空空的喔～快去逛逛吧！
+          </div>
           <div class="row product mb-2" v-for="cartItem in cart" :key="cartItem.product.id">
             <div
               class="col-2 product-img"
@@ -207,6 +210,9 @@ export default {
 <style lang="scss" scoped>
 .container {
   margin-top: 2.5rem;
+  @media screen and (max-width: 576px) {
+    margin-top: 1.5rem;
+  }
   color: $dark;
   .customer {
     .form-group {
@@ -223,6 +229,11 @@ export default {
     border: 1px solid $dark;
     border-radius: 0.5rem;
     height: fit-content;
+    .empty {
+      height: 50vh;
+      line-height: 50vh;
+      text-align: center;
+    }
     .product {
       .product-img {
         background-size: contain;
