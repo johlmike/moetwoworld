@@ -124,17 +124,17 @@
           </div>
           <hr />
           <div class="row">
-            <div class="col font-weight-bold text-right total" v-show="coupons.length === 0">
+            <div class="col font-weight-bold text-right total" v-show="_.isEmpty(coupon)">
               總計：{{ sumPrice }} 元
             </div>
           </div>
           <div class="row">
-            <div class="col font-weight-bold text-right discount" v-show="coupons.length > 0">
-              >>折扣：{{ sumPrice - discountedPrice }} 元
+            <div class="col text-right discount" v-show="!_.isEmpty(coupon)">
+              {{ coupon.title }} >> 折扣：{{ sumPrice - discountedPrice }} 元
             </div>
           </div>
           <div class="row">
-            <div class="col font-weight-bold text-right total" v-show="coupons.length > 0">
+            <div class="col font-weight-bold text-right total" v-show="!_.isEmpty(coupon)">
               特價：{{ discountedPrice }} 元
             </div>
           </div>
@@ -149,7 +149,7 @@ export default {
   props: {
     products: Array,
     cart: Array,
-    coupons: Array,
+    coupon: Object,
   },
   data() {
     return {
@@ -169,13 +169,17 @@ export default {
     sendOrder() {
       const loader = this.$loading.show();
       const url = `${this.baseUrl}${this.uuid}/ec/orders`;
+      // 檢查是否使用優惠券
+      this._.isEmpty(this.coupon)
+        ? (this.userData.coupon = '')
+        : (this.userData.coupon = this.coupon.code);
       this.axios
         .post(url, this.userData)
         .then((res) => {
           loader.hide();
-          console.log(res);
           // 傳送訂單成功，呼叫 layout 清除購物車和優惠券資料
           this.$bus.$emit('orderSent');
+          this.$router.push(`/finish/${res.data.data.id}`);
         })
         .catch((err) => {
           console.log(err);
@@ -184,7 +188,7 @@ export default {
   },
   computed: {
     discountedPrice() {
-      return Math.ceil((this.sumPrice * this.discount) / 100);
+      return Math.ceil((this.sumPrice * this.coupon.percent) / 100);
     },
     sumPrice() {
       let sum = 0;
@@ -193,15 +197,6 @@ export default {
         sum += cartItemSum;
       });
       return sum;
-    },
-    discount() {
-      let percent = 100;
-      if (this.coupons.length > 0) {
-        this.coupons.forEach((coupon) => {
-          percent = (percent * coupon.percent) / 100;
-        });
-      }
-      return percent;
     },
   },
 };

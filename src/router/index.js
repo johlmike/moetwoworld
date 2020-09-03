@@ -37,6 +37,11 @@ const routes = [
         name: '結帳',
         component: () => import('../views/layout/Checkout.vue'),
       },
+      {
+        path: '/finish/:id',
+        name: '結帳完成',
+        component: () => import('../views/layout/Finish.vue'),
+      },
     ],
   },
   // 巢狀路由

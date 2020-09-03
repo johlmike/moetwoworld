@@ -49,7 +49,7 @@
               <span class="input-group-text" id="coupon">優惠券</span>
             </div>
             <input
-              v-model.lazy="coupon"
+              v-model.lazy="couponCode"
               type="text"
               id="input-coupon"
               class="form-control text-center"
@@ -60,19 +60,19 @@
             />
           </div>
           <div class="col-sm-4 coupon">
-            <div v-for="(coupon, index) in coupons" :key="coupon.code">
+            <div v-show="!_.isEmpty(coupon)">
               {{ coupon.title }} - {{ coupon.code }}
               <font-awesome-icon
                 class="ml-2 btn-delete-coupon"
                 :icon="['fas', 'times-circle']"
-                @click="deleteCoupon(index)"
+                @click="deleteCoupon()"
               />
             </div>
           </div>
-          <div class="col-sm-2 sum" v-show="coupons.length === 0">總價： {{ sumPrice }} 元</div>
-          <div class="col-sm-2 sum" v-show="coupons.length > 0">
+          <div class="col-sm-2 sum" v-show="_.isEmpty(coupon)">總計： {{ sumPrice }} 元</div>
+          <div class="col-sm-2 sum" v-show="!_.isEmpty(coupon)">
             <span class="discountNum">
-              >>折扣： {{ Math.floor(sumPrice - discountedPrice) }} 元
+              折扣： {{ Math.floor(sumPrice - discountedPrice) }} 元
             </span>
             <br />
             特價： {{ discountedPrice }} 元
@@ -99,14 +99,14 @@ export default {
   props: {
     products: Array,
     cart: Array,
-    coupons: Array,
+    coupon: Object,
   },
   data() {
     return {
       baseUrl: process.env.VUE_APP_BASEURL,
       uuid: process.env.VUE_APP_UUID,
       localCart: [],
-      coupon: '',
+      couponCode: '',
     };
   },
   methods: {
@@ -135,14 +135,14 @@ export default {
       this.$bus.$emit('deleteCart', this.localCart[index].product.id);
     },
     checkCoupon() {
-      if (this.coupon) {
+      if (this.couponCode) {
         const loader = this.$loading.show();
         const url = `${this.baseUrl}${this.uuid}/ec/coupon/search`;
         this.axios
-          .post(url, { code: this.coupon })
+          .post(url, { code: this.couponCode })
           .then((res) => {
             loader.hide();
-            this.coupon = '';
+            this.couponCode = '';
             const nowTimestamp = new Date().getTime();
             const deadlineTimestamp = res.data.data.deadline.timestamp * 1000;
             // 有此優惠券，檢查是否已過期
@@ -152,27 +152,16 @@ export default {
                 icon: 'error',
               });
             } else {
-              // 沒有過期，檢查是否已輸入
-              const isRepeat = this.coupons.some((coupon) => {
-                return coupon.code === res.data.data.code;
+              this.$swal({
+                text: '優惠券加入成功',
+                icon: 'success',
               });
-              if (isRepeat) {
-                this.$swal({
-                  text: '優惠券已存在',
-                  icon: 'error',
-                });
-              } else {
-                this.$swal({
-                  text: '優惠券加入成功',
-                  icon: 'success',
-                });
-                this.$bus.$emit('setCoupons', [...this.coupons, res.data.data]);
-              }
+              this.$bus.$emit('setCoupon', res.data.data);
             }
           })
           .catch((err) => {
             loader.hide();
-            this.coupon = '';
+            this.couponCode = '';
             if (err.response.data.message === '該 COUPON 序號並不存在。') {
               this.$swal({
                 text: '優惠券輸入錯誤',
@@ -184,18 +173,13 @@ export default {
           });
       }
     },
-    deleteCoupon(index) {
-      this.$bus.$emit(
-        'setCoupons',
-        this.coupons.filter((coupon, couponIndex) => {
-          return couponIndex !== index;
-        })
-      );
+    deleteCoupon() {
+      this.$bus.$emit('setCoupon', {});
     },
   },
   computed: {
     discountedPrice() {
-      return Math.ceil((this.sumPrice * this.discount) / 100);
+      return Math.ceil((this.sumPrice * this.coupon.percent) / 100);
     },
     sumPrice() {
       let sum = 0;
@@ -204,15 +188,6 @@ export default {
         sum += cartItemSum;
       });
       return sum;
-    },
-    discount() {
-      let percent = 100;
-      if (this.coupons.length) {
-        this.coupons.forEach((coupon) => {
-          percent = (percent * coupon.percent) / 100;
-        });
-      }
-      return percent;
     },
   },
   watch: {
@@ -287,10 +262,13 @@ export default {
       }
     }
     .sum {
+      font-size: 1.2rem;
       text-align: center;
       line-height: 2.5rem;
       .discountNum {
         color: gray;
+        font-size: 1rem;
+        font-weight: 100;
       }
     }
     .btn-checkout {

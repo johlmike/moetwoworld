@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <Navbar></Navbar>
-    <router-view :products="products" :cart="cart" :coupons="coupons" class="view"></router-view>
+    <router-view :products="products" :cart="cart" :coupon="coupon" class="view"></router-view>
     <Footer></Footer>
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {
       products: [],
       totalPage: 1,
       cart: [],
-      coupons: [],
+      coupon: {},
     };
   },
   methods: {
@@ -182,12 +182,12 @@ export default {
           console.log(err.response);
         });
     },
-    setCoupons(coupons) {
-      this.coupons = coupons;
+    setCoupon(coupon) {
+      this.coupon = coupon;
     },
     orderSent() {
       this.cart = [];
-      this.coupons = [];
+      this.coupon = {};
     },
   },
   created() {
@@ -200,7 +200,7 @@ export default {
     this.$bus.$on('updateCart', this.updateCart);
     this.$bus.$on('deleteCart', this.deleteCart);
     this.$bus.$on('deleteAllCart', this.deleteAllCart);
-    this.$bus.$on('setCoupons', this.setCoupons);
+    this.$bus.$on('setCoupon', this.setCoupon);
     this.$bus.$on('orderSent', this.orderSent);
   },
 };
