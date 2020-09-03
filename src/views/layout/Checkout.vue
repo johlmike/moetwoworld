@@ -203,7 +203,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.checkout {
   margin-top: 2.5rem;
   @media screen and (max-width: 576px) {
     margin-top: 1.5rem;

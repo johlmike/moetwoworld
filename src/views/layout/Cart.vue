@@ -1,7 +1,7 @@
 <template>
-  <div class="cart">
+  <div class="cart mb-3">
     <div class="container">
-      <div class="cart-table pb-5">
+      <div class="cart-table">
         <div class="cart-table-head row">
           <div class="col-sm-5 col-5">商品名稱</div>
           <div class="col-sm-2 col-3">數量</div>

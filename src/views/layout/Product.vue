@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="product container">
+  <div class="product">
+    <div class="container">
       <div class="row product-header">
         <div class="col-md-5 header-left"></div>
         <div class="col-md-7 header-right mt-4 mt-sm-0">
