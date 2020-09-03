@@ -79,7 +79,11 @@
           </div>
           <div class="col-sm-1 text-center">
             <router-link to="/checkout">
-              <button type="button" class="btn btn-primary btn-checkout">
+              <button
+                type="button"
+                class="btn btn-primary btn-checkout"
+                :disabled="cart.length === 0"
+              >
                 結帳
               </button>
             </router-link>
