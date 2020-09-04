@@ -145,7 +145,7 @@ export default {
     cursor: pointer;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: auto 100%;
+    background-size: auto 95%;
     .cover {
       display: flex;
       align-items: center;
