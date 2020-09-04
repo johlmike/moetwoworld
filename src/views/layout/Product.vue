@@ -139,6 +139,9 @@ export default {
   }
   .product-body {
     white-space: pre-line;
+    /deep/ img {
+      max-width: 100%;
+    }
   }
 }
 </style>
