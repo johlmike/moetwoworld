@@ -31,7 +31,6 @@
       @save="saveProduct"
       @alert="handleFormAlert"
     ></EditingModal>
-    <AlertModal ref="alertModal"></AlertModal>
   </div>
 </template>
 
@@ -39,14 +38,12 @@
 import DProductsTable from '@/components/DProductsTable.vue';
 import Pagination from '@/components/Pagination.vue';
 import EditingModal from '@/components/EditingModal.vue';
-import AlertModal from '@/components/AlertModal.vue';
 
 export default {
   components: {
     DProductsTable,
     Pagination,
     EditingModal,
-    AlertModal,
   },
   props: {
     token: String,
@@ -233,7 +230,10 @@ export default {
       this.updateProduct(index);
     },
     handleFormAlert(msg) {
-      this.$refs.alertModal.openAlertModal(msg);
+      this.$swal({
+        icon: 'error',
+        html: msg,
+      });
     },
     saveProduct(mode, editedProduct) {
       // 取回使用者編輯完畢之商品資訊
