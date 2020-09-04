@@ -57,11 +57,7 @@
               <font-awesome-icon
                 :icon="['fas', 'minus-square']"
                 class="icon-quantity"
-                @click="
-                  () => {
-                    if (addingQuantity > 1) addingQuantity--;
-                  }
-                "
+                @click="minusQuantity"
               />
               <ValidationProvider rules="min_value:1|required" v-slot="{ errors, classes }">
                 <input
@@ -69,15 +65,16 @@
                   :class="classes"
                   name="數量"
                   type="number"
-                  v-model.number="addingQuantity"
+                  v-model.number.lazy="addingQuantity"
                   min="1"
+                  @change="checkStock"
                 />
                 <span class="invalid-feedback">{{ errors[0] }}</span>
               </ValidationProvider>
               <font-awesome-icon
                 :icon="['fas', 'plus-square']"
                 class="icon-quantity"
-                @click="addingQuantity++"
+                @click="addQuantity"
               />
             </div>
           </div>
@@ -119,6 +116,25 @@ export default {
       this.addingProduct = product;
       this.addingQuantity = 1;
       $('.addCartModal').modal('show');
+    },
+    addQuantity() {
+      if (this.addingQuantity < Number(this.addingProduct.options.stock)) {
+        this.addingQuantity++;
+      }
+    },
+    minusQuantity() {
+      if (this.addingQuantity > 1) {
+        this.addingQuantity--;
+      }
+    },
+    checkStock() {
+      if (this.addingQuantity < 1) {
+        this.addingQuantity = 1;
+      } else {
+        if (this.addingQuantity > Number(this.addingProduct.options.stock)) {
+          this.addingQuantity = Number(this.addingProduct.options.stock);
+        }
+      }
     },
     addCart() {
       if (this.addingQuantity) {
