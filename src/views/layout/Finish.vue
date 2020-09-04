@@ -48,7 +48,7 @@
             <div class="col">{{ product.product.title }} x {{ product.quantity }}</div>
           </div>
           <div class="row mt-3">
-            <table class="table table-borderless">
+            <table class="table table-borderless m-0">
               <tbody>
                 <tr>
                   <th scope="row" class="text-right">收件人姓名：</th>

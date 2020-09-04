@@ -15,12 +15,20 @@ module.exports = {
       title: '萌兔窩｜細心呵護您的小萌寵',
     },
   },
+  chainWebpack: (config) => {
+    config.module
+      .rule('js')
+      .test(/\.js?$/)
+      .exclude.add(/node_modules(?!\/quill-image-drop-module|quill-image-resize-module)/)
+      .end();
+  },
   configureWebpack: {
     plugins: [
       new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery',
         'windows.jQuery': 'jquery',
+        'window.Quill': 'quill',
       }),
     ],
   },

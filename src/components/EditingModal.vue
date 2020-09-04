@@ -148,7 +148,11 @@
                 <div class="form-row mt-3">
                   <div class="col">
                     <label for="description">商品說明</label>
-                    <vue-editor v-model="editingProduct.description" />
+                    <vue-editor
+                      v-model="editingProduct.description"
+                      :customModules="customModulesForEditor"
+                      :editorOptions="editorSettings"
+                    />
                   </div>
                 </div>
                 <div class="form-row mt-3">
@@ -195,6 +199,7 @@
 
 <script>
 /* global $ */
+import ImageResize from 'quill-image-resize-module';
 
 export default {
   props: {
@@ -205,6 +210,12 @@ export default {
     return {
       baseUrl: process.env.VUE_APP_BASEURL,
       uuid: process.env.VUE_APP_UUID,
+      customModulesForEditor: [{ alias: 'imageResize', module: ImageResize }],
+      editorSettings: {
+        modules: {
+          imageResize: {},
+        },
+      },
       editingProduct: {},
       errorMsg: '',
     };

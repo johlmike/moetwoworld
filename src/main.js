@@ -57,6 +57,8 @@ import {
 // sweet alert
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+// animate.css
+import animated from 'animate.css';
 
 // 載入 Axios
 Vue.use(VueAxios, axios);
@@ -127,6 +129,8 @@ const options = {
   confirmButtonColor: '#BC3322',
 };
 Vue.use(VueSweetalert2, options);
+// 載入 animate.css
+Vue.use(animated);
 // 實體化 $bus
 Vue.prototype.$bus = new Vue();
 
