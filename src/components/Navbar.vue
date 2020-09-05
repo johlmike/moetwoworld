@@ -18,14 +18,24 @@
     <div class="collapse navbar-collapse nav-area" id="navbarSupportedContent">
       <div class="left nav-block">
         <router-link to="/" v-slot="{ isActive, href }" exact>
-          <a :href="href" :class="{ 'is-active': isActive }" class="nav-link" @click="hideNavbar">
+          <a
+            :href="href"
+            :class="{ 'is-active': isActive }"
+            class="nav-link mb-sm-0 mb-2"
+            @click="hideNavbar"
+          >
             <font-awesome-icon :icon="['fas', 'home']" class="nav-icon" />
             <span>回首頁</span>
             <span class="sr-only" v-if="isActive">(current)</span>
           </a>
         </router-link>
         <router-link to="/products" v-slot="{ isActive, href }">
-          <a :href="href" :class="{ 'is-active': isActive }" class="nav-link" @click="hideNavbar">
+          <a
+            :href="href"
+            :class="{ 'is-active': isActive }"
+            class="nav-link mb-sm-0 mb-2"
+            @click="hideNavbar"
+          >
             <font-awesome-icon :icon="['fas', 'newspaper']" class="nav-icon" />
             <span>商品列表</span>
             <span class="sr-only" v-if="isActive">(current)</span>
@@ -37,7 +47,12 @@
       </div>
       <div class="right nav-block">
         <router-link to="/about" v-slot="{ isActive, href }">
-          <a :href="href" :class="{ 'is-active': isActive }" class="nav-link" @click="hideNavbar">
+          <a
+            :href="href"
+            :class="{ 'is-active': isActive }"
+            class="nav-link mb-sm-0 mb-2"
+            @click="hideNavbar"
+          >
             <font-awesome-icon :icon="['fas', 'carrot']" class="nav-icon" />
             <span>關於兔窩</span>
             <span class="sr-only" v-if="isActive">(current)</span>
@@ -122,6 +137,8 @@ export default {
       font-size: 1rem;
       border-radius: 0.5rem;
       margin-right: 0.5rem;
+      // margin-top: 0.5rem;
+      // margin-bottom: 0.5rem;
       .nav-icon {
         margin-right: 0.5rem;
       }
