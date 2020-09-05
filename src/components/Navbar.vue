@@ -39,7 +39,7 @@
         <router-link to="/about" v-slot="{ isActive, href }">
           <a :href="href" :class="{ 'is-active': isActive }" class="nav-link" @click="hideNavbar">
             <font-awesome-icon :icon="['fas', 'carrot']" class="nav-icon" />
-            <span>關於我們</span>
+            <span>關於兔窩</span>
             <span class="sr-only" v-if="isActive">(current)</span>
           </a>
         </router-link>

@@ -24,6 +24,7 @@ export default {
   props: {
     products: Array,
     cart: Array,
+    coupon: Object,
   },
   components: {
     ProductCategory,

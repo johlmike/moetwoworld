@@ -24,7 +24,7 @@ const routes = [
       },
       {
         path: '/about',
-        name: '關於我們',
+        name: '關於兔窩',
         component: () => import('../views/layout/About.vue'),
       },
       {

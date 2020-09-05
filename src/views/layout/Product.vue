@@ -49,6 +49,7 @@ export default {
   props: {
     products: Array,
     cart: Array,
+    coupon: Object,
   },
   data() {
     return {
