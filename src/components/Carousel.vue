@@ -66,13 +66,13 @@ export default {
       overflow: hidden;
       white-space: nowrap;
       animation: fade 3.5s;
-      animation-delay: 1s;
+      animation-delay: 500ms;
       animation-fill-mode: forwards;
       // 手機版改變寬度和高度
       @media screen and (max-width: 576px) {
         height: 90%;
         animation: fadeMobile 3.5s;
-        animation-delay: 1s;
+        animation-delay: 500ms;
         animation-fill-mode: forwards;
       }
       .first {
