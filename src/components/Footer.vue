@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-4 mb-3">
-          <img src="@/assets/萌兔窩@LOGO.svg" alt="" width="100%" height="100%" />
+          <img src="@/assets/萌兔窩@LOGO.svg" alt="" height="100px" />
         </div>
         <div class="col-sm-4">
           <p><font-awesome-icon :icon="['fas', 'phone']" class="nav-icon" />02-2222-2222</p>

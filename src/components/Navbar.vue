@@ -137,8 +137,6 @@ export default {
       font-size: 1rem;
       border-radius: 0.5rem;
       margin-right: 0.5rem;
-      // margin-top: 0.5rem;
-      // margin-bottom: 0.5rem;
       .nav-icon {
         margin-right: 0.5rem;
       }
