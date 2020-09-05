@@ -31,6 +31,7 @@ import lodash from 'lodash';
 // FontAwesome
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faFacebook, faGithub, faWordpressSimple } from '@fortawesome/free-brands-svg-icons';
 import {
   faCartPlus,
   faHome,
@@ -121,7 +122,10 @@ library.add(
   faPhone,
   faEnvelope,
   faMap,
-  faTimesCircle
+  faTimesCircle,
+  faFacebook,
+  faGithub,
+  faWordpressSimple
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 // 載入 sweet alert

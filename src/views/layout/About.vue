@@ -2,7 +2,7 @@
   <div class="about">
     <div class="container">
       <div class="row about-body" :style="{ backgroundImage: `url(${publicPath}img/about.jpg)` }">
-        <div class="col-sm-5 offset-sm-7 p-5 about-content">
+        <div class="col-sm-5 offset-sm-7 p-5 about-content animate__animated animate__fadeInDown">
           <h2>— 誕生 —</h2>
           <p>
             2020 年 9 月，萌兔窩正式誕生，開始了鼠兔產品的銷售業務，由一位兩隻兔寶的兔爸獨力經營。

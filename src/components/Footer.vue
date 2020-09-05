@@ -16,10 +16,49 @@
             樓
           </p>
         </div>
-        <div class="col-sm-4">
-          <p><font-awesome-icon :icon="['fas', 'user']" class="nav-icon" />Johlmike</p>
+        <div class="col-sm-4 author">
+          <p>
+            <font-awesome-icon :icon="['fas', 'user']" class="nav-icon" />Johlmike
+            <a
+              href="https://github.com/johlmike/moetwoworld"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="author-website"
+            >
+              <font-awesome-icon :icon="['fab', 'github']" class="nav-icon" />
+            </a>
+            <a
+              href="https://github.com/johlmike/moetwoworld"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="author-website"
+            >
+              <font-awesome-icon :icon="['fab', 'facebook']" class="nav-icon" />
+            </a>
+            <a
+              href="https://blog.johlmike.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="author-website"
+            >
+              <font-awesome-icon :icon="['fab', 'wordpress-simple']" class="nav-icon" />
+            </a>
+          </p>
           <p>無商業用途，僅供學習使用</p>
-          <p>圖文來源：<a href="http://www.bunny-nature.com.tw/">德國邦尼</a></p>
+          <p>
+            商品來源：
+            <a href="http://www.bunny-nature.com.tw/" target="_blank" rel="noreferrer noopener"
+              >邦尼</a
+            >
+            、
+            <a
+              href="https://www.gex-fp.co.jp/chinese/index.html"
+              target="_blank"
+              rel="noreferrer noopener"
+              >GEX</a
+            >
+            、 Marukan
+          </p>
         </div>
       </div>
     </div>
@@ -39,6 +78,13 @@ footer {
   box-shadow: 0 0 3px 0 $dark;
   .nav-icon {
     margin-right: 0.5rem;
+  }
+  .author {
+    .author-website {
+      .nav-icon {
+        margin: 0 0.5rem;
+      }
+    }
   }
 }
 </style>
