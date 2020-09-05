@@ -4,8 +4,10 @@
       <li
         v-for="(category, index) in categoryList"
         :key="'cat_' + index"
-        class="list-group-item"
-        :class="{ active: index === 0 }"
+        class="list-group-item m-0 p-0"
+        :class="{
+          active: index === 0,
+        }"
         @click="handleClick(category)"
       >
         {{ category }}
@@ -15,6 +17,8 @@
 </template>
 
 <script>
+/* global $ */
+
 export default {
   props: {
     categoryList: {
@@ -37,6 +41,14 @@ export default {
       this.$emit('changeCategory', activeCategory);
     },
   },
+  mounted() {
+    $('.list-group-item').on('mouseover', function() {
+      $(this).addClass('item-hover');
+    });
+    $('.list-group-item').on('mouseleave', function() {
+      $(this).removeClass('item-hover');
+    });
+  },
 };
 </script>
 
@@ -45,15 +57,26 @@ export default {
   position: -webkit-sticky;
   position: sticky;
   top: 6.5rem;
-}
-
-.list-group-item {
-  cursor: pointer;
-  color: $dark;
-  border-color: $dark;
-  &.active {
-    color: $bright;
-    background-color: $dark;
+  .list-group-item {
+    height: 3rem;
+    line-height: 3rem;
+    border-top-width: 1px;
+    border-bottom-width: 0px;
+    &:last-child {
+      border-bottom-width: 1px;
+    }
+    cursor: pointer;
+    color: $dark;
+    border-color: $dark;
+    text-align: center;
+    transition-duration: 500ms;
+    &.active {
+      color: $bright;
+      background-color: $dark;
+    }
+  }
+  .item-hover {
+    font-size: 1.1rem;
   }
 }
 </style>
