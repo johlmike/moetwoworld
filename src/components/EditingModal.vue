@@ -290,9 +290,8 @@ export default {
             $('.custom-file-label').html('');
             this.editingProduct.imageUrl.unshift(res.data.data.path);
           })
-          .catch((err) => {
+          .catch(() => {
             loader.hide();
-            console.log(err.response);
           });
       }
     },

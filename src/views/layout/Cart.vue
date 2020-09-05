@@ -167,8 +167,6 @@ export default {
                 text: '優惠券輸入錯誤',
                 icon: 'error',
               });
-            } else {
-              console.log(err.response);
             }
           });
       }

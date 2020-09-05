@@ -111,9 +111,8 @@ export default {
             }
           });
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
-          console.log(err.response);
         });
     },
     createProduct() {
@@ -133,9 +132,8 @@ export default {
           this.getProducts(); // 重新讀取商品列表
           this.$refs.editingModal.closeEditingModal();
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
-          console.log(err.response);
         });
     },
     getProduct(index, id, cb) {
@@ -148,9 +146,8 @@ export default {
           this.products[index].description = res.data.data.description;
           cb();
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
-          console.log(err.response);
         });
     },
     updateProduct(index) {
@@ -182,9 +179,8 @@ export default {
           loader.hide();
           this.$refs.editingModal.closeEditingModal();
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
-          console.log(err.response);
         });
     },
     deleteProduct(index) {
@@ -197,9 +193,8 @@ export default {
           loader.hide();
           this.getProducts(); // 刷新頁面
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
-          console.log(err.response);
         });
     },
     toggleModal(index) {

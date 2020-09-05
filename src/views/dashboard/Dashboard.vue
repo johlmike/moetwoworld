@@ -68,11 +68,10 @@ export default {
           this.axios.defaults.headers.common.Authorization = `Bearer ${this.token}`;
           this.tokenReady = true;
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
           $('#error-modal').modal('show');
           setTimeout(this.authFailed, 2000);
-          console.log(err.response);
         });
     } else {
       // 沒Token表示沒驗證過，跳轉至管理員登入頁面

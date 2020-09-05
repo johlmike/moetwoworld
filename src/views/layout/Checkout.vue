@@ -181,8 +181,8 @@ export default {
           this.$bus.$emit('orderSent');
           this.$router.push(`/finish/${res.data.data.id}`);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          loader.hide();
         });
     },
   },

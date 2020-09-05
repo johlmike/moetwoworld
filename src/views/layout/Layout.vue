@@ -60,8 +60,8 @@ export default {
             this.products = this._.cloneDeep(filtedProducts);
           }
         })
-        .catch((res) => {
-          console.log(res.response);
+        .catch(() => {
+          loader.hide();
         });
     },
     getCart() {
@@ -73,9 +73,8 @@ export default {
           loader.hide();
           this.cart = [...res.data.data];
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
-          console.log(err.response);
         });
     },
     addCart(id, quantity, cb) {
@@ -111,9 +110,8 @@ export default {
               cb();
             }
           })
-          .catch((err) => {
+          .catch(() => {
             loader.hide();
-            console.log(err.response);
           });
       }
     },
@@ -147,7 +145,6 @@ export default {
               icon: 'warning',
             });
           }
-          console.log(err.response);
         });
     },
     deleteCart(id) {
@@ -164,9 +161,8 @@ export default {
             icon: 'success',
           });
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
-          console.log(err.response);
         });
     },
     deleteAllCart() {
@@ -177,9 +173,8 @@ export default {
         .then(() => {
           loader.hide();
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
-          console.log(err.response);
         });
     },
     setCoupon(coupon) {

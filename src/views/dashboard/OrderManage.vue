@@ -246,9 +246,8 @@ export default {
           this.orders = res.data.data;
           this.totalPage = res.data.meta.pagination.total_pages;
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
-          console.log(err.response);
         });
     },
     changePage(page) {

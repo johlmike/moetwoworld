@@ -139,7 +139,6 @@ export default {
           if (err.response.data.message === 'exceptions.frontend.orders.not_found') {
             this.$router.push('/');
           }
-          console.log(err.response);
         });
     },
   },

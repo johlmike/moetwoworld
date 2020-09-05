@@ -92,11 +92,10 @@ export default {
           loader.hide();
           this.$router.push('/admin/products-manage');
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
           // 驗證失敗，刪除舊的token
           document.cookie = 'moerabbitworld-token=;';
-          console.log(err.response);
         });
     }
   },

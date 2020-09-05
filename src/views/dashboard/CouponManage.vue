@@ -275,9 +275,8 @@ export default {
           this.coupons = res.data.data;
           this.totalPage = res.data.meta.pagination.total_pages;
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
-          console.log(err.response);
         });
     },
     addCoupon() {
@@ -298,9 +297,8 @@ export default {
           loader.hide();
           this.coupons.unshift(res.data.data);
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
-          console.log(err.response);
         });
     },
     updateCoupon(id, index) {
@@ -324,9 +322,8 @@ export default {
             this.coupons[index][key] = this._.cloneDeep(res.data.data[key]);
           });
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
-          console.log(err.response);
         });
     },
     deleteCoupon(index) {
@@ -339,9 +336,8 @@ export default {
           loader.hide();
           this.coupons.splice(index, 1);
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
-          console.log(err.response);
         });
     },
     toggleEnabled(evt, index) {
