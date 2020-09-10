@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import Carousel from '@/components/Carousel.vue';
-import Swiper from '@/components/Swiper.vue';
+import Carousel from '@/components/fronted/Carousel.vue';
+import Swiper from '@/components/fronted/Swiper.vue';
 
 export default {
   props: {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DNavbar></DNavbar>
+    <BNavbar></BNavbar>
     <router-view :token="token" :tokenReady="tokenReady"></router-view>
     <div class="modal" tabindex="-1" role="dialog" id="error-modal" data-backdrop="static">
       <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
@@ -21,11 +21,11 @@
 
 <script>
 /* global $ */
-import DNavbar from '@/components/DNavbar.vue';
+import BNavbar from '@/components/backed/BNavbar.vue';
 
 export default {
   components: {
-    DNavbar,
+    BNavbar,
   },
   data() {
     return {

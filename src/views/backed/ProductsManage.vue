@@ -13,7 +13,7 @@
         新增商品
       </button>
     </div>
-    <DProductsTable
+    <BProductsTable
       class="mt-3"
       :products="products"
       :page="page"
@@ -23,7 +23,7 @@
       @toggle-hot="toggleHot"
       @toggle-modal="toggleModal"
       @delete-product="deleteProduct"
-    ></DProductsTable>
+    ></BProductsTable>
     <EditingModal
       ref="editingModal"
       :product="editingProduct"
@@ -35,13 +35,13 @@
 </template>
 
 <script>
-import DProductsTable from '@/components/DProductsTable.vue';
+import BProductsTable from '@/components/backed/BProductsTable.vue';
 import Pagination from '@/components/Pagination.vue';
-import EditingModal from '@/components/EditingModal.vue';
+import EditingModal from '@/components/backed/EditingModal.vue';
 
 export default {
   components: {
-    DProductsTable,
+    BProductsTable,
     Pagination,
     EditingModal,
   },

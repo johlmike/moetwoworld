@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import ProductCategory from '@/components/ProductsCategory.vue';
-import ProductsTable from '@/components/ProductsTable.vue';
+import ProductCategory from '@/components/fronted/ProductsCategory.vue';
+import ProductsTable from '@/components/fronted/ProductsTable.vue';
 
 export default {
   props: {
