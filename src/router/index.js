@@ -6,41 +6,41 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    component: () => import('../views/layout/Layout.vue'),
+    component: () => import('../views/fronted/Layout.vue'),
     children: [
       {
         path: '',
-        component: () => import('../views/layout/Index.vue'),
+        component: () => import('../views/fronted/Index.vue'),
       },
       {
         path: '/products',
         name: '商品列表',
-        component: () => import('../views/layout/Products.vue'),
+        component: () => import('../views/fronted/Products.vue'),
       },
       {
         path: '/product/:id',
         name: '商品頁',
-        component: () => import('../views/layout/Product.vue'),
+        component: () => import('../views/fronted/Product.vue'),
       },
       {
         path: '/about',
         name: '關於兔窩',
-        component: () => import('../views/layout/About.vue'),
+        component: () => import('../views/fronted/About.vue'),
       },
       {
         path: '/cart',
         name: '購物車',
-        component: () => import('../views/layout/Cart.vue'),
+        component: () => import('../views/fronted/Cart.vue'),
       },
       {
         path: '/checkout',
         name: '結帳',
-        component: () => import('../views/layout/Checkout.vue'),
+        component: () => import('../views/fronted/Checkout.vue'),
       },
       {
         path: '/finish/:id',
         name: '結帳完成',
-        component: () => import('../views/layout/Finish.vue'),
+        component: () => import('../views/fronted/Finish.vue'),
       },
     ],
   },
@@ -51,28 +51,28 @@ const routes = [
   },
   {
     path: '/admin',
-    component: () => import('../views/dashboard/Dashboard.vue'),
+    component: () => import('../views/backed/Layout.vue'),
     children: [
       {
         path: '',
         alias: 'products-manage',
         name: '商品管理',
-        component: () => import('../views/dashboard/ProductsManage.vue'),
+        component: () => import('../views/backed/ProductsManage.vue'),
       },
       {
         path: 'coupon-manage',
         name: '優惠券管理',
-        component: () => import('../views/dashboard/CouponManage.vue'),
+        component: () => import('../views/backed/CouponManage.vue'),
       },
       {
         path: 'order-manage',
         name: '訂單管理',
-        component: () => import('../views/dashboard/OrderManage.vue'),
+        component: () => import('../views/backed/OrderManage.vue'),
       },
       {
         path: 'picture-manage',
         name: '圖片管理',
-        component: () => import('../views/dashboard/PictureManage.vue'),
+        component: () => import('../views/backed/PictureManage.vue'),
       },
     ],
   },
