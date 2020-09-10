@@ -57,40 +57,25 @@ export default {
         autoplay: {
           delay: 1500,
         },
-        speed: 3000,
-        slidesPerView: 4,
+        speed: 1500,
+        slidesPerView: 1,
         spaceBetween: 30,
         pagination: {
           el: '.swiper-pagination',
           clickable: true,
         },
+        breakpoints: {
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          992: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+          },
+        },
       },
     };
-  },
-  methods: {
-    checkMobile() {
-      if (this.isMobileDevice()) {
-        this.swiperOption.slidesPerView = 1;
-      } else {
-        this.swiperOption.slidesPerView = 4;
-      }
-    },
-    isMobileDevice() {
-      const mobileDevice = [
-        'Android',
-        'webOS',
-        'iPhone',
-        // 'iPad',
-        'iPod',
-        'BlackBerry',
-        'Windows Phone',
-      ];
-      let isMobileDevice = mobileDevice.some((e) => navigator.userAgent.match(e));
-      return isMobileDevice;
-    },
-  },
-  created() {
-    this.checkMobile();
   },
 };
 </script>
