@@ -17,8 +17,6 @@
 </template>
 
 <script>
-/* global $ */
-
 export default {
   props: {
     categoryList: {
@@ -41,14 +39,6 @@ export default {
       this.$emit('changeCategory', activeCategory);
     },
   },
-  mounted() {
-    $('.list-group-item').on('mouseover', function() {
-      $(this).addClass('item-hover');
-    });
-    $('.list-group-item').on('mouseleave', function() {
-      $(this).removeClass('item-hover');
-    });
-  },
 };
 </script>
 
@@ -65,6 +55,9 @@ export default {
     &:last-child {
       border-bottom-width: 1px;
     }
+    &:hover {
+      font-size: 1.1rem;
+    }
     cursor: pointer;
     color: $dark;
     border-color: $dark;
@@ -74,9 +67,6 @@ export default {
       color: $bright;
       background-color: $dark;
     }
-  }
-  .item-hover {
-    font-size: 1.1rem;
   }
 }
 </style>
