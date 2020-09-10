@@ -41,15 +41,23 @@ export default {
       document.cookie = 'moerabbitworld-token=;';
       this.$router.push('/admin-login');
     },
+    getCookie(name) {
+      const cookieArr = document.cookie.split(';');
+      for (let i = 0; i < cookieArr.length; i += 1) {
+        const cookiePair = cookieArr[i].split('=');
+        if (name === cookiePair[0].trim()) {
+          return decodeURIComponent(cookiePair[1]);
+        }
+      }
+      // Return null if not found
+      return null;
+    },
   },
   mounted() {
     let token = '';
     // DOM建立時，檢查是否已有Token
     if (document.cookie) {
-      token = document.cookie
-        .split('; ')
-        .find((row) => row.startsWith('moerabbitworld-token'))
-        .split('=')[1];
+      token = this.getCookie('moerabbitworld-token');
     }
     // 有Token的話，檢查Token是否正確
     if (token) {

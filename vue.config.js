@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const webpack = require('webpack');
 
 module.exports = {
@@ -35,7 +36,7 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        prependData: `@import "@/scss/_variables.scss";`,
+        prependData: '@import "@/assets/scss/_variables.scss";',
       },
     },
   },

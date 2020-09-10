@@ -1,7 +1,5 @@
 // Vue 核心
 import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
 // Axios
 import axios from 'axios';
 import VueAxios from 'vue-axios';
@@ -9,12 +7,17 @@ import VueAxios from 'vue-axios';
 import $ from 'jquery';
 import 'popper.js';
 import 'bootstrap';
-import './scss/main.scss';
+import '@/assets/scss/main.scss';
 // vue-overlay-loading
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 // VeeValidate
-import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate';
+import {
+  ValidationProvider,
+  ValidationObserver,
+  extend,
+  configure,
+} from 'vee-validate';
 import {
   required,
   min_value as minValue,
@@ -59,6 +62,9 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 // animate.css
 import animated from 'animate.css';
+// entry point 及 router
+import App from './App.vue';
+import router from './router';
 
 // 載入 Axios
 Vue.use(VueAxios, axios);
@@ -124,7 +130,7 @@ library.add(
   faTimesCircle,
   faFacebook,
   faGithub,
-  faWordpressSimple
+  faWordpressSimple,
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 // 載入 sweet alert

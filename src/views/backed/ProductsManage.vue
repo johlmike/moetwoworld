@@ -164,12 +164,7 @@ export default {
       });
       // 準備Ajax使用之url和data
       const url = `${this.baseUrl}${this.uuid}/admin/ec/product/${this.editingId}`;
-      const data = this._.cloneDeep(
-        this.products.find((product) => {
-          // 使用editingId查找欲更新的商品並clone一份
-          return product.id === this.editingId;
-        })
-      );
+      const data = this._.cloneDeep(this.products.find((product) => product.id === this.editingId));
       // 將options轉換成字串(為符合後端要求)
       data.options = JSON.stringify(data.options);
       // Ajax
@@ -185,7 +180,7 @@ export default {
     },
     deleteProduct(index) {
       const loader = this.$loading.show();
-      const id = this.products[index].id;
+      const { id } = this.products[index];
       const url = `${this.baseUrl}${this.uuid}/admin/ec/product/${id}`;
       this.axios
         .delete(url)

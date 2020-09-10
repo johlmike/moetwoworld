@@ -62,12 +62,8 @@ export default {
           document.cookie = `moerabbitworld-token=${token}; expires=${expire};`; // 存入cookie
           this.$router.push('/admin/products-manage');
         })
-        .catch((err) => {
+        .catch(() => {
           loader.hide();
-          const { data } = err.response; // 取得error回傳的data
-          const idMsg = data.errors.email ? data.errors.email[0] : ''; // 取得帳號的錯誤訊息
-          const pwMsg = data.errors.password ? data.errors.password[0] : ''; // 取得密碼的錯誤訊息
-          alert(`${idMsg}\n${pwMsg}`);
         });
     },
   },

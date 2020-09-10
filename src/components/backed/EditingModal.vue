@@ -301,7 +301,7 @@ export default {
   },
   mounted() {
     // 讓 bootstrap 的 input file 會顯示選取的檔案之名稱
-    $('input[type="file"]').change(function(e) {
+    $('input[type="file"]').change((e) => {
       const fileName = e.target.files[0].name;
       $('.custom-file-label').html(fileName);
     });

@@ -34,7 +34,7 @@ export default {
       this.$emit('change-page', page);
     },
     previousPage() {
-      if (this.currentPage != 1) {
+      if (this.currentPage !== 1) {
         this.$emit('change-page', this.currentPage - 1);
       }
     },

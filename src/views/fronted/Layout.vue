@@ -38,8 +38,11 @@ export default {
             this.getProducts(page + 1);
           } else {
             // 所有商品讀取完畢，轉換 options 字串為物件
-            this.products.forEach((product) => {
-              product.options = JSON.parse(product.options);
+            this.products = this.products.map((product) => {
+              const options = JSON.parse(product.options);
+              const editedProduct = this._.cloneDeep(product);
+              editedProduct.options = options;
+              return editedProduct;
             });
             // 重新排序所有商品，符合分類順序
             let filtedProducts = [];
@@ -155,7 +158,7 @@ export default {
         .then(() => {
           loader.hide();
           // 更新本地端購物車
-          this.cart = this.cart.filter((cartItem) => cartItem.product.id != id);
+          this.cart = this.cart.filter((cartItem) => cartItem.product.id !== id);
           this.$swal({
             text: '刪除成功',
             icon: 'success',

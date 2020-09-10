@@ -305,7 +305,7 @@ export default {
       $('.coupon-modal').modal('hide');
       const loader = this.$loading.show();
       const url = `${this.baseUrl}${this.uuid}/admin/ec/coupon/${id}`;
-      let data = {
+      const data = {
         title: this.editingCoupon.title,
         code: this.editingCoupon.code,
         percent: this.editingCoupon.percent,

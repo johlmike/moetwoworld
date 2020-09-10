@@ -20,6 +20,7 @@
     "lodash": "^4.17.19",
     "popper.js": "^1.16.1",
     "quill-image-resize-module": "^3.0.0",
+    "sweetalert2": "^10.0.2",
     "swiper": "^5.4.5",
     "vee-validate": "^3.3.8",
     "vue": "^2.6.11",
@@ -57,7 +58,9 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "max-len": "off"
+    }
   },
   "browserslist": [
     "> 1%",

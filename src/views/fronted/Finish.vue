@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 <template>
   <div class="finish mb-3">
     <div class="container">

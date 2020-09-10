@@ -119,21 +119,19 @@ export default {
     },
     addQuantity() {
       if (this.addingQuantity < Number(this.addingProduct.options.stock)) {
-        this.addingQuantity++;
+        this.addingQuantity += 1;
       }
     },
     minusQuantity() {
       if (this.addingQuantity > 1) {
-        this.addingQuantity--;
+        this.addingQuantity -= 1;
       }
     },
     checkStock() {
       if (this.addingQuantity < 1) {
         this.addingQuantity = 1;
-      } else {
-        if (this.addingQuantity > Number(this.addingProduct.options.stock)) {
-          this.addingQuantity = Number(this.addingProduct.options.stock);
-        }
+      } else if (this.addingQuantity > Number(this.addingProduct.options.stock)) {
+        this.addingQuantity = Number(this.addingProduct.options.stock);
       }
     },
     addCart() {

@@ -47,16 +47,12 @@ export default {
       }
     },
     filtedProducts(...category) {
-      return this.products.filter((product) => {
-        return category.includes(product.category);
-      });
+      return this.products.filter((product) => category.includes(product.category));
     },
   },
   computed: {
     hotProducts() {
-      return this.products.filter((product) => {
-        return product.options.hot === true;
-      });
+      return this.products.filter((product) => product.options.hot === true);
     },
   },
   mounted() {

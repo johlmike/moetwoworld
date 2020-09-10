@@ -46,7 +46,7 @@ export default {
       this.cb();
     },
     cb() {
-      console.error('Callback not found');
+      return false;
     },
     openModal(cb) {
       $('.checkModal').modal('show');

@@ -170,9 +170,11 @@ export default {
       const loader = this.$loading.show();
       const url = `${this.baseUrl}${this.uuid}/ec/orders`;
       // 檢查是否使用優惠券
-      this._.isEmpty(this.coupon)
-        ? (this.userData.coupon = '')
-        : (this.userData.coupon = this.coupon.code);
+      if (this._.isEmpty(this.coupon)) {
+        this.userData.coupon = '';
+      } else {
+        this.userData.coupon = this.coupon.code;
+      }
       this.axios
         .post(url, this.userData)
         .then((res) => {
