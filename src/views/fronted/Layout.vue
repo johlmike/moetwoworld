@@ -198,6 +198,15 @@ export default {
     this.$bus.$on('setCoupon', this.setCoupon);
     this.$bus.$on('orderSent', this.orderSent);
   },
+  beforeDestroy() {
+    this.$bus.$off('getCart');
+    this.$bus.$off('addCart');
+    this.$bus.$off('updateCart');
+    this.$bus.$off('deleteCart');
+    this.$bus.$off('deleteAllCart');
+    this.$bus.$off('setCoupon');
+    this.$bus.$off('orderSent');
+  },
 };
 </script>
 
