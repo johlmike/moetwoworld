@@ -8,8 +8,7 @@ import VueAxios from 'vue-axios';
 // Bootstrap
 import $ from 'jquery';
 import 'popper.js';
-import 'bootstrap'; // Import js file
-// import 'bootstrap/dist/css/bootstrap.min.css'; // 改於 main.scss 載入
+import 'bootstrap';
 import './scss/main.scss';
 // vue-overlay-loading
 import Loading from 'vue-loading-overlay';
@@ -71,7 +70,7 @@ Vue.use(Loading);
 Vue.use(Vue2Editor);
 // 載入 lodash
 Vue.use(VueLodash, { lodash });
-// 設定 VeeValidate
+// 載入 VeeValidate
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
 extend('email', {
