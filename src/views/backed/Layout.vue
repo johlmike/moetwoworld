@@ -1,7 +1,7 @@
 <template>
   <div>
     <BNavbar></BNavbar>
-    <router-view :token="token" :tokenReady="tokenReady"></router-view>
+    <router-view :tokenReady="tokenReady"></router-view>
     <div class="modal" tabindex="-1" role="dialog" id="error-modal" data-backdrop="static">
       <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
         <div class="modal-content">
