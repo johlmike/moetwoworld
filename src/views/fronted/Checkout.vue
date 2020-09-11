@@ -109,13 +109,13 @@
                 backgroundImage: 'url(' + cartItem.product.imageUrl[0] + ')',
               }"
             ></div>
-            <div class="col-8 product-detail">
+            <div class="col-7 product-detail">
               <div class="product-title">{{ cartItem.product.title }}</div>
               <div class="product-price">
                 ${{ commaFormat(cartItem.product.price) }} / {{ cartItem.product.unit }}
               </div>
             </div>
-            <div class="col-2 product-number">
+            <div class="col-3 product-number">
               <div class="product-number">x {{ cartItem.quantity }}</div>
               <div class="product-total font-weight-bold">
                 ${{ commaFormat(cartItem.product.price * cartItem.quantity) }}
@@ -249,6 +249,11 @@ export default {
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
+      }
+      .product-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
     .discount {
