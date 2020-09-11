@@ -112,20 +112,20 @@
             <div class="col-8 product-detail">
               <div class="product-title">{{ cartItem.product.title }}</div>
               <div class="product-price">
-                ${{ cartItem.product.price }} / {{ cartItem.product.unit }}
+                ${{ commaFormat(cartItem.product.price) }} / {{ cartItem.product.unit }}
               </div>
             </div>
             <div class="col-2 product-number">
               <div class="product-number">x {{ cartItem.quantity }}</div>
               <div class="product-total font-weight-bold">
-                ${{ cartItem.product.price * cartItem.quantity }}
+                ${{ commaFormat(cartItem.product.price * cartItem.quantity) }}
               </div>
             </div>
           </div>
           <hr />
           <div class="row">
             <div class="col font-weight-bold text-right total" v-show="_.isEmpty(coupon)">
-              總計：{{ sumPrice }} 元
+              總計：{{ commaFormat(sumPrice) }} 元
             </div>
           </div>
           <div class="row">
@@ -186,6 +186,14 @@ export default {
         .catch(() => {
           loader.hide();
         });
+    },
+    commaFormat(value) {
+      return value
+        .toString()
+        .replace(
+          /^(-?\d+?)((?:\d{3})+)(?=\.\d+$|$)/,
+          (all, pre, groupOf3Digital) => pre + groupOf3Digital.replace(/\d{3}/g, ',$&'),
+        );
     },
   },
   computed: {

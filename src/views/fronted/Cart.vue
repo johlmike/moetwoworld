@@ -10,9 +10,7 @@
           <div class="col-sm-1 col-1"></div>
         </div>
         <div class="cart-table-body">
-          <div v-if="localCart.length === 0" class="empty">
-            購物車還空空的喔～快去逛逛吧！
-          </div>
+          <div v-if="localCart.length === 0" class="empty">購物車還空空的喔～快去逛逛吧！</div>
           <div
             v-for="(cartItem, index) in localCart"
             :key="'cart_' + index"
@@ -30,9 +28,11 @@
               />
               {{ cartItem.product.unit }}
             </div>
-            <div class="col-sm-2 col-3 body-item-price">${{ cartItem.product.price }}</div>
+            <div class="col-sm-2 col-3 body-item-price">
+              ${{ commaFormat(cartItem.product.price) }}
+            </div>
             <div class="col-sm-2 col-2 body-item-total d-sm-flex d-none">
-              ${{ cartItem.product.price * cartItem.quantity }}
+              ${{ commaFormat(cartItem.product.price * cartItem.quantity) }}
             </div>
             <div class="col-sm-1 col-1 body-item-delete">
               <font-awesome-icon
@@ -69,13 +69,13 @@
               />
             </div>
           </div>
-          <div class="col-sm-2 sum" v-show="_.isEmpty(coupon)">總計： {{ sumPrice }} 元</div>
+          <div class="col-sm-2 sum" v-show="_.isEmpty(coupon)">總計： {{ commaFormat(sumPrice) }} 元</div>
           <div class="col-sm-2 sum" v-show="!_.isEmpty(coupon)">
-            <span class="discountNum">
-              折扣： {{ Math.floor(sumPrice - discountedPrice) }} 元
-            </span>
+            <span class="discountNum"
+              >折扣： {{ commaFormat(Math.floor(sumPrice - discountedPrice)) }} 元</span
+            >
             <br />
-            特價： {{ discountedPrice }} 元
+            特價： {{ commaFormat(discountedPrice) }} 元
           </div>
           <div class="col-sm-1 text-center">
             <router-link to="/checkout">
@@ -173,6 +173,14 @@ export default {
     },
     deleteCoupon() {
       this.$bus.$emit('setCoupon', {});
+    },
+    commaFormat(value) {
+      return value
+        .toString()
+        .replace(
+          /^(-?\d+?)((?:\d{3})+)(?=\.\d+$|$)/,
+          (all, pre, groupOf3Digital) => pre + groupOf3Digital.replace(/\d{3}/g, ',$&'),
+        );
     },
   },
   computed: {

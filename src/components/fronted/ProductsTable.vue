@@ -20,8 +20,8 @@
           </router-link>
           <p class="card-text ellipsis">{{ product.content }}</p>
           <div class="card-price">
-            <div class="origin-price">{{ `NT\$ ${product.origin_price}` }}</div>
-            <div class="price">{{ `NT\$ ${product.price}` }}</div>
+            <div class="origin-price">{{ product.origin_price | commaFormat | priceFormat }}</div>
+            <div class="price">{{ product.price | commaFormat | priceFormat }}</div>
           </div>
           <a
             href="#"
@@ -142,6 +142,19 @@ export default {
         this.$bus.$emit('addCart', addingId, this.addingQuantity);
         $('.addCartModal').modal('hide');
       }
+    },
+  },
+  filters: {
+    commaFormat(value) {
+      return value
+        .toString()
+        .replace(
+          /^(-?\d+?)((?:\d{3})+)(?=\.\d+$|$)/,
+          (all, pre, groupOf3Digital) => pre + groupOf3Digital.replace(/\d{3}/g, ',$&'),
+        );
+    },
+    priceFormat(value) {
+      return `NT$ ${value}`;
     },
   },
 };
