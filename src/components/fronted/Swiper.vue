@@ -19,7 +19,9 @@
               </div>
             </router-link>
             <div class="d-flex flex-column justify-content-start card-body">
-              <h5 class="card-title ellipsis">{{ product.title }}</h5>
+              <router-link :to="`/product/${product.id}`">
+                <h5 class="card-title ellipsis">{{ product.title }}</h5>
+              </router-link>
               <p class="card-text ellipsis">{{ product.content }}</p>
               <div class="card-price">
                 <div class="origin-price">{{ `NT\$ ${product.origin_price}` }}</div>
