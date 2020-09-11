@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <Navbar></Navbar>
+    <Navbar :cart="cart"></Navbar>
     <router-view :products="products" :cart="cart" :coupon="coupon" class="view"></router-view>
     <Footer></Footer>
   </div>

@@ -62,11 +62,12 @@
           <a
             :href="href"
             :class="{ 'is-active': isActive }"
-            class="nav-link mb-sm-0 mb-2"
+            class="nav-link cart mb-sm-0 mb-2"
             @click="hideNavbar"
           >
             <font-awesome-icon :icon="['fas', 'shopping-cart']" class="nav-icon" />
             <span>購物車</span>
+            <span class="badge badge-pill badge-primary">{{ cart.length }}</span>
             <span class="sr-only" v-if="isActive">(current)</span>
           </a>
         </router-link>
@@ -79,6 +80,9 @@
 /* global $ */
 
 export default {
+  props: {
+    cart: Array,
+  },
   methods: {
     hideNavbar() {
       $('#navbarSupportedContent').collapse('hide');
@@ -151,6 +155,14 @@ export default {
         .nav-icon {
           color: $bright;
         }
+      }
+    }
+    .cart {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .badge {
+        margin-left: 5px;
       }
     }
   }
