@@ -2,9 +2,6 @@
   <footer>
     <div class="container">
       <div class="row">
-        <div class="col-sm-4 mb-3">
-          <img src="@/assets/萌兔窩@LOGO.svg" alt="" height="100px" />
-        </div>
         <div class="col-sm-4">
           <p><font-awesome-icon :icon="['fas', 'phone']" class="nav-icon" />02-2222-2222</p>
           <p>
@@ -16,7 +13,10 @@
             樓
           </p>
         </div>
-        <div class="col-sm-4 author">
+        <div class="col-sm-4 mb-3">
+          <img src="@/assets/萌兔窩@LOGO.svg" alt="" height="100px" />
+        </div>
+        <div class="col-sm-4 author text-right">
           <p>
             <font-awesome-icon :icon="['fas', 'user']" class="nav-icon" />Johlmike
             <a
