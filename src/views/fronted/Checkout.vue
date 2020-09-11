@@ -234,6 +234,11 @@ export default {
     border: 1px solid $dark;
     border-radius: 0.5rem;
     height: fit-content;
+    @media screen and (min-width: 576px) {
+      position: -webkit-sticky;
+      position: sticky;
+      top: calc(2.5rem + 64px);
+    }
     .empty {
       height: 50vh;
       line-height: 50vh;
