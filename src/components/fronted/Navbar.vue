@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg">
-    <a class="mobile navbar-brand" href="#">
+    <router-link to="/" class="mobile navbar-brand">
       <img src="@/assets/logo.svg" alt="萌兔窩" />
-    </a>
+    </router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -42,9 +42,9 @@
           </a>
         </router-link>
       </div>
-      <div class="desktop navbar-brand">
+      <router-link to="/" class="desktop navbar-brand">
         <img src="@/assets/logo.svg" alt="萌兔窩" />
-      </div>
+      </router-link>
       <div class="right nav-block">
         <router-link to="/about" v-slot="{ isActive, href }">
           <a
