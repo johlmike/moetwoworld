@@ -2,7 +2,10 @@
   <footer>
     <div class="container">
       <div class="row">
-        <div class="col-sm-4">
+        <div class="logo col-sm-4 mb-3 order-md-2">
+          <img src="@/assets/萌兔窩@LOGO.svg" alt="萌兔窩" />
+        </div>
+        <div class="col-sm-4 order-md-1">
           <p><font-awesome-icon :icon="['fas', 'phone']" class="nav-icon" />02-2222-2222</p>
           <p>
             <font-awesome-icon :icon="['fas', 'envelope']" class="nav-icon" />
@@ -13,10 +16,7 @@
             樓
           </p>
         </div>
-        <div class="col-sm-4 mb-3">
-          <img src="@/assets/萌兔窩@LOGO.svg" alt="" height="100px" />
-        </div>
-        <div class="col-sm-4 author text-right">
+        <div class="author col-sm-4 order-md-3 text-md-right">
           <p>
             <font-awesome-icon :icon="['fas', 'user']" class="nav-icon" />Johlmike
             <a
@@ -78,6 +78,11 @@ footer {
   box-shadow: 0 0 3px 0 $dark;
   .nav-icon {
     margin-right: 0.5rem;
+  }
+  .logo {
+    img {
+      max-height: 100px;
+    }
   }
   .author {
     .author-website {
