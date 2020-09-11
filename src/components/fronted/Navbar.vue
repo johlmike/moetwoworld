@@ -164,6 +164,18 @@ export default {
       .badge {
         margin-left: 5px;
       }
+      &:hover{
+        .badge {
+          background-color: white;
+          color: $dark;
+        }
+      }
+      &.is-active {
+        .badge {
+          background-color: white;
+          color: $dark;
+        }
+      }
     }
   }
 }
