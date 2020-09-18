@@ -1,79 +1,81 @@
 <template>
-  <nav class="navbar navbar-expand-lg">
-    <router-link to="/" class="mobile navbar-brand">
-      <img src="@/assets/logo.svg" alt="萌兔窩" />
-    </router-link>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <font-awesome-icon :icon="['fas', 'bars']" class="nav-icon" />
-    </button>
-
-    <div class="collapse navbar-collapse nav-area" id="navbarSupportedContent">
-      <div class="left nav-block">
-        <router-link to="/" v-slot="{ isActive, href }" exact>
-          <a
-            :href="href"
-            :class="{ 'is-active': isActive }"
-            class="nav-link mb-sm-0 mb-2"
-            @click="hideNavbar"
-          >
-            <font-awesome-icon :icon="['fas', 'home']" class="nav-icon" />
-            <span>回首頁</span>
-            <span class="sr-only" v-if="isActive">(current)</span>
-          </a>
-        </router-link>
-        <router-link to="/products" v-slot="{ isActive, href }">
-          <a
-            :href="href"
-            :class="{ 'is-active': isActive }"
-            class="nav-link mb-sm-0 mb-2"
-            @click="hideNavbar"
-          >
-            <font-awesome-icon :icon="['fas', 'newspaper']" class="nav-icon" />
-            <span>商品列表</span>
-            <span class="sr-only" v-if="isActive">(current)</span>
-          </a>
-        </router-link>
-      </div>
-      <router-link to="/" class="desktop navbar-brand">
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <router-link to="/" class="mobile navbar-brand">
         <img src="@/assets/logo.svg" alt="萌兔窩" />
       </router-link>
-      <div class="right nav-block">
-        <router-link to="/about" v-slot="{ isActive, href }">
-          <a
-            :href="href"
-            :class="{ 'is-active': isActive }"
-            class="nav-link mb-sm-0 mb-2"
-            @click="hideNavbar"
-          >
-            <font-awesome-icon :icon="['fas', 'carrot']" class="nav-icon" />
-            <span>關於兔窩</span>
-            <span class="sr-only" v-if="isActive">(current)</span>
-          </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <font-awesome-icon :icon="['fas', 'bars']" class="nav-icon" />
+      </button>
+
+      <div class="collapse navbar-collapse nav-area" id="navbarSupportedContent">
+        <div class="left nav-block">
+          <router-link to="/" v-slot="{ isActive, href }" exact>
+            <a
+              :href="href"
+              :class="{ 'is-active': isActive }"
+              class="nav-link mb-sm-0 mb-2"
+              @click="hideNavbar"
+            >
+              <font-awesome-icon :icon="['fas', 'home']" class="nav-icon" />
+              <span>回首頁</span>
+              <span class="sr-only" v-if="isActive">(current)</span>
+            </a>
+          </router-link>
+          <router-link to="/products" v-slot="{ isActive, href }">
+            <a
+              :href="href"
+              :class="{ 'is-active': isActive }"
+              class="nav-link mb-sm-0 mb-2"
+              @click="hideNavbar"
+            >
+              <font-awesome-icon :icon="['fas', 'newspaper']" class="nav-icon" />
+              <span>商品列表</span>
+              <span class="sr-only" v-if="isActive">(current)</span>
+            </a>
+          </router-link>
+        </div>
+        <router-link to="/" class="desktop navbar-brand">
+          <img src="@/assets/logo.svg" alt="萌兔窩" />
         </router-link>
-        <router-link to="/cart" v-slot="{ isActive, href }">
-          <a
-            :href="href"
-            :class="{ 'is-active': isActive }"
-            class="nav-link cart mb-sm-0 mb-2"
-            @click="hideNavbar"
-          >
-            <font-awesome-icon :icon="['fas', 'shopping-cart']" class="nav-icon" />
-            <span>購物車</span>
-            <span class="badge badge-pill badge-primary">{{ cart.length }}</span>
-            <span class="sr-only" v-if="isActive">(current)</span>
-          </a>
-        </router-link>
+        <div class="right nav-block">
+          <router-link to="/about" v-slot="{ isActive, href }">
+            <a
+              :href="href"
+              :class="{ 'is-active': isActive }"
+              class="nav-link mb-sm-0 mb-2"
+              @click="hideNavbar"
+            >
+              <font-awesome-icon :icon="['fas', 'carrot']" class="nav-icon" />
+              <span>關於兔窩</span>
+              <span class="sr-only" v-if="isActive">(current)</span>
+            </a>
+          </router-link>
+          <router-link to="/cart" v-slot="{ isActive, href }">
+            <a
+              :href="href"
+              :class="{ 'is-active': isActive }"
+              class="nav-link cart mb-sm-0 mb-2"
+              @click="hideNavbar"
+            >
+              <font-awesome-icon :icon="['fas', 'shopping-cart']" class="nav-icon" />
+              <span>購物車</span>
+              <span class="badge badge-pill badge-primary">{{ cart.length }}</span>
+              <span class="sr-only" v-if="isActive">(current)</span>
+            </a>
+          </router-link>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
 </template>
 
 <script>
@@ -164,7 +166,7 @@ export default {
       .badge {
         margin-left: 5px;
       }
-      &:hover{
+      &:hover {
         .badge {
           background-color: white;
           color: $dark;
