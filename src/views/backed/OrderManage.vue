@@ -43,24 +43,15 @@
         </tbody>
       </table>
     </div>
-    <CheckModal
-      ref="checkModal"
-      :msg="checkMsg"
-      agreeText="確定刪除"
-      cancelText="取消"
-      mainColor="warning"
-    ></CheckModal>
   </div>
 </template>
 
 <script>
 import Pagination from '@/components/Pagination.vue';
-import CheckModal from '@/components/CheckModal.vue';
 
 export default {
   components: {
     Pagination,
-    CheckModal,
   },
   props: {
     token: String,

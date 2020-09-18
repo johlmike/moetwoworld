@@ -63,31 +63,16 @@
         </tr>
       </tbody>
     </table>
-    <CheckModal
-      ref="checkModal"
-      :msg="checkMsg"
-      agreeText="確定刪除"
-      cancelText="取消"
-      mainColor="warning"
-    ></CheckModal>
   </div>
 </template>
 
 <script>
-import CheckModal from '@/components/CheckModal.vue';
-
 export default {
   props: {
     products: Array,
     page: Number,
     paged: Number,
   },
-  data() {
-    return {
-      checkMsg: '',
-    };
-  },
-  components: { CheckModal },
   methods: {
     updateProduct(evt, index) {
       this.$emit('update-product', evt, index);
@@ -105,8 +90,20 @@ export default {
       this.$emit('delete-product', index);
     },
     triggerDelete(index) {
-      this.checkMsg = `確認刪除「${this.products[index].title}」嗎？`;
-      this.$refs.checkModal.openModal(this.deleteProduct.bind(this, index));
+      const checkMsg = `確認刪除「${this.products[index].title}」嗎？`;
+      this.$swal({
+        icon: 'warning',
+        text: checkMsg,
+        showCancelButton: true,
+        reverseButtons: true,
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+      }).then(({ isConfirmed }) => {
+        if (isConfirmed) {
+          return this.deleteProduct(index);
+        }
+        return false;
+      });
     },
   },
 };

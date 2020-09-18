@@ -21,6 +21,7 @@
 <script>
 import Carousel from '@/components/fronted/Carousel.vue';
 import Swiper from '@/components/fronted/Swiper.vue';
+// import { articleCollection } from '@/assets/firebase';
 
 export default {
   props: {

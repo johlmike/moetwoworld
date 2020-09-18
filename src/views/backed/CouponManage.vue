@@ -218,25 +218,16 @@
         </div>
       </div>
     </div>
-    <CheckModal
-      ref="checkModal"
-      :msg="checkMsg"
-      agreeText="確定刪除"
-      cancelText="取消"
-      mainColor="warning"
-    ></CheckModal>
   </div>
 </template>
 
 <script>
 /* global $ */
 import Pagination from '@/components/Pagination.vue';
-import CheckModal from '@/components/CheckModal.vue';
 
 export default {
   components: {
     Pagination,
-    CheckModal,
   },
   props: {
     token: String,
@@ -260,7 +251,6 @@ export default {
       editingDate: '',
       editingTime: '',
       addingCoupon: true, // 分辨 Modal 狀態是「新增」還是「編輯」
-      checkMsg: '',
     };
   },
   methods: {
@@ -375,8 +365,20 @@ export default {
       }
     },
     triggerDelete(index) {
-      this.checkMsg = `確認刪除「${this.coupons[index].title}」嗎？`;
-      this.$refs.checkModal.openModal(this.deleteCoupon.bind(this, index));
+      const checkMsg = `確認刪除「${this.coupons[index].title}」嗎？`;
+      this.$swal({
+        icon: 'warning',
+        text: checkMsg,
+        showCancelButton: true,
+        reverseButtons: true,
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+      }).then(({ isConfirmed }) => {
+        if (isConfirmed) {
+          return this.deleteCoupon(index);
+        }
+        return false;
+      });
     },
     changePage(page) {
       this.coupons = [];

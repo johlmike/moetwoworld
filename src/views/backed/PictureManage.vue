@@ -38,24 +38,15 @@
         </tbody>
       </table>
     </div>
-    <CheckModal
-      ref="checkModal"
-      msg="確認刪除此張圖片嗎？"
-      agreeText="確定刪除"
-      cancelText="取消"
-      mainColor="warning"
-    ></CheckModal>
   </div>
 </template>
 
 <script>
 import Pagination from '@/components/Pagination.vue';
-import CheckModal from '@/components/CheckModal.vue';
 
 export default {
   components: {
     Pagination,
-    CheckModal,
   },
   props: {
     token: String,
@@ -102,7 +93,19 @@ export default {
         });
     },
     triggerDelete(id, index) {
-      this.$refs.checkModal.openModal(this.deletePicture.bind(this, id, index));
+      this.$swal({
+        icon: 'warning',
+        text: '確認刪除此張圖片嗎？',
+        showCancelButton: true,
+        reverseButtons: true,
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+      }).then(({ isConfirmed }) => {
+        if (isConfirmed) {
+          return this.deletePicture(id, index);
+        }
+        return false;
+      });
     },
     changePage(page) {
       this.orders = [];
