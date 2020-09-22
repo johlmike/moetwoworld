@@ -74,6 +74,11 @@ const routes = [
         name: '圖片管理',
         component: () => import('../views/backed/PictureManage.vue'),
       },
+      {
+        path: 'news-manage',
+        name: '新聞管理',
+        component: () => import('../views/backed/NewsManage.vue'),
+      },
     ],
   },
   {
