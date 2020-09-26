@@ -79,6 +79,11 @@ const routes = [
         name: '新聞管理',
         component: () => import('../views/backed/NewsManage.vue'),
       },
+      {
+        path: 'academy-manage',
+        name: '愛兔文章管理',
+        component: () => import('../views/backed/AcademyManage.vue'),
+      },
     ],
   },
   {

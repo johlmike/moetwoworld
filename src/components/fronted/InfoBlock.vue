@@ -2,6 +2,12 @@
   <div class="p-3 info-block">
     <div class="info-title">{{ title }}</div>
     <hr />
+    <template v-for="articleItem in article">
+      <div class="info-item" :key="articleItem.id">
+        <div class="info-item-date">{{ formatDate(articleItem.data.created) }}</div>
+        <div class="info-item-title">{{ articleItem.data.title }}</div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -40,11 +46,19 @@ export default {
           .get()
           .then((res) => {
             loader.hide();
-            res.forEach((article) => {
-              this.article.push({ id: article.id, data: article.data() });
+            res.forEach((academy) => {
+              this.article.push({ id: academy.id, data: academy.data() });
             });
           });
       }
+    },
+    formatDate(timestamp) {
+      const created = new Date(timestamp * 1000);
+      let dateString = '';
+      dateString += `${created.getFullYear()}年`;
+      dateString += ` ${created.getMonth()}月`;
+      dateString += ` ${created.getDate()}日`;
+      return dateString;
     },
   },
   created() {
@@ -68,12 +82,24 @@ export default {
   background-color: white;
   border-radius: 0.25rem;
   color: $dark;
+  box-shadow: 0 0 4px 0px;
   .info-title {
     font-size: 1.75rem;
     text-align: center;
   }
   hr {
     border-color: $dark;
+  }
+  .info-item {
+    display: flex;
+    flex-direction: row;
+    .info-item-date {
+      min-width: 8.5rem;
+    }
+    .info-item-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 </style>

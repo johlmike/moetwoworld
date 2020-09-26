@@ -39,6 +39,13 @@
                 <span class="sr-only" v-if="isActive">(current)</span>
               </a>
             </router-link>
+            <router-link to="/admin/academy-manage" v-slot="{ isActive, href }">
+              <a :href="href" :class="{ 'is-active': isActive }" class="nav-link">
+                <font-awesome-icon :icon="['fas', 'newspaper']" class="nav-icon" />
+                <span>愛兔文章管理</span>
+                <span class="sr-only" v-if="isActive">(current)</span>
+              </a>
+            </router-link>
           </div>
           <div class="nav-block d-flex flex-row">
             <a href="#" class="nav-link" @click.prevent="logout">
