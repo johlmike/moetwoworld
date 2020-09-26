@@ -141,16 +141,22 @@ export default {
     getNews() {
       const loader = this.$loading.show();
       // Ajax
-      newsCollection.get().then((res) => {
-        loader.hide();
-        res.forEach((news) => {
-          this.news.push({ id: news.id, data: news.data() });
+      newsCollection
+        .orderBy('created', 'desc')
+        .get()
+        .then((res) => {
+          loader.hide();
+          res.forEach((news) => {
+            this.news.push({ id: news.id, data: news.data() });
+          });
+          this.totalPage = Math.ceil(this.news.length / this.paged);
         });
-        this.totalPage = Math.ceil(this.news.length / this.paged);
-      });
     },
     addNew() {
       const loader = this.$loading.show();
+      // 建立時間戳記
+      this.editingNews.created = Date.now();
+      this.editingNews.updated = Date.now();
       // Ajax
       newsCollection.add(this.editingNews).then(() => {
         loader.hide();
@@ -161,6 +167,8 @@ export default {
     },
     updateNews(id) {
       const loader = this.$loading.show();
+      // 更新時間戳記
+      this.editingNews.updated = Date.now();
       // Ajax
       newsCollection
         .doc(id)

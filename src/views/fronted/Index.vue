@@ -2,6 +2,14 @@
   <div class="home">
     <Carousel :isTop="isTop"></Carousel>
     <div class="container">
+      <div class="row mt-3">
+        <div class="col-md-6">
+          <InfoBlock category="news"></InfoBlock>
+        </div>
+        <div class="col-md-6">
+          <InfoBlock category="academy"></InfoBlock>
+        </div>
+      </div>
       <Swiper title="小萌寵的最愛" :products="hotProducts" class="my-3"></Swiper>
       <Swiper
         title="小萌寵吃得飽"
@@ -21,7 +29,7 @@
 <script>
 import Carousel from '@/components/fronted/Carousel.vue';
 import Swiper from '@/components/fronted/Swiper.vue';
-// import { articleCollection } from '@/assets/firebase';
+import InfoBlock from '@/components/fronted/InfoBlock.vue';
 
 export default {
   props: {
@@ -32,6 +40,7 @@ export default {
   components: {
     Carousel,
     Swiper,
+    InfoBlock,
   },
   data() {
     return {
