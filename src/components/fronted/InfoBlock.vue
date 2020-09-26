@@ -59,7 +59,7 @@ export default {
       const created = new Date(timestamp * 1000);
       let dateString = '';
       dateString += `${created.getFullYear()}年`;
-      dateString += ` ${created.getMonth()}月`;
+      dateString += ` ${created.getMonth() + 1}月`;
       dateString += ` ${created.getDate()}日`;
       return dateString;
     },

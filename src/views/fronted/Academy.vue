@@ -48,7 +48,7 @@ export default {
       const created = new Date(timestamp * 1000);
       let dateString = '';
       dateString += `${created.getFullYear()}/`;
-      dateString += `${created.getMonth()}/`;
+      dateString += `${created.getMonth() + 1}/`;
       dateString += `${created.getDate()}`;
       return dateString;
     },
