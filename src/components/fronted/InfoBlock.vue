@@ -5,7 +5,9 @@
     <template v-for="articleItem in article">
       <div class="info-item" :key="articleItem.id">
         <div class="info-item-date">{{ formatDate(articleItem.data.created) }}</div>
-        <div class="info-item-title">{{ articleItem.data.title }}</div>
+        <router-link class="info-item-title" :to="`/${url}/${articleItem.id}`">
+          {{ articleItem.data.title }}
+        </router-link>
       </div>
     </template>
   </div>
@@ -22,6 +24,7 @@ export default {
     return {
       title: '',
       article: [],
+      url: '',
     };
   },
   methods: {
@@ -66,9 +69,11 @@ export default {
     switch (this.category) {
       case 'news':
         this.title = '最新消息';
+        this.url = 'news-page';
         return;
       case 'academy':
         this.title = '愛兔學堂';
+        this.url = 'academy-page';
         return;
       default:
         this.title = 'error';

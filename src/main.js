@@ -56,6 +56,8 @@ import {
   faEnvelope,
   faMap,
   faTimesCircle,
+  faSchool,
+  faBullhorn,
 } from '@fortawesome/free-solid-svg-icons';
 // sweet alert
 import VueSweetalert2 from 'vue-sweetalert2';
@@ -131,6 +133,8 @@ library.add(
   faFacebook,
   faGithub,
   faWordpressSimple,
+  faSchool,
+  faBullhorn,
 );
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 // 載入 sweet alert

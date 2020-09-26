@@ -42,11 +42,35 @@
               <span class="sr-only" v-if="isActive">(current)</span>
             </a>
           </router-link>
+          <router-link to="/news" v-slot="{ isActive, href }">
+            <a
+              :href="href"
+              :class="{ 'is-active': isActive }"
+              class="nav-link mb-sm-0 mb-2"
+              @click="hideNavbar"
+            >
+              <font-awesome-icon :icon="['fas', 'bullhorn']" class="nav-icon" />
+              <span>最新消息</span>
+              <span class="sr-only" v-if="isActive">(current)</span>
+            </a>
+          </router-link>
         </div>
         <router-link to="/" class="desktop navbar-brand">
           <img src="@/assets/logo.svg" alt="萌兔窩" />
         </router-link>
         <div class="right nav-block">
+          <router-link to="/academy" v-slot="{ isActive, href }">
+            <a
+              :href="href"
+              :class="{ 'is-active': isActive }"
+              class="nav-link mb-sm-0 mb-2"
+              @click="hideNavbar"
+            >
+              <font-awesome-icon :icon="['fas', 'school']" class="nav-icon" />
+              <span>愛兔學堂</span>
+              <span class="sr-only" v-if="isActive">(current)</span>
+            </a>
+          </router-link>
           <router-link to="/about" v-slot="{ isActive, href }">
             <a
               :href="href"

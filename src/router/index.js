@@ -23,6 +23,26 @@ const routes = [
         component: () => import('../views/fronted/Product.vue'),
       },
       {
+        path: '/news',
+        name: '最新消息',
+        component: () => import('../views/fronted/News.vue'),
+      },
+      {
+        path: '/news-page/:id',
+        name: '最新消息頁',
+        component: () => import('../views/fronted/NewsPage.vue'),
+      },
+      {
+        path: '/academy',
+        name: '愛兔學堂',
+        component: () => import('../views/fronted/Academy.vue'),
+      },
+      {
+        path: '/academy-page/:id',
+        name: '愛兔學堂頁',
+        component: () => import('../views/fronted/AcademyPage.vue'),
+      },
+      {
         path: '/about',
         name: '關於兔窩',
         component: () => import('../views/fronted/About.vue'),
